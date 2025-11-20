@@ -1,0 +1,28 @@
+mutation CreateNewUser @auth(level: USER) {
+  user_insert(data: {
+    id_expr: "uuidV4()",
+    createdAt_expr: "request.time",
+    displayName: "New User"
+  })
+}
+
+query GetCurrentUser @auth(level: USER) {
+  user(key: {id_expr: "auth.uid"}) {
+    id
+    displayName
+    email
+    photoUrl
+  }
+}
+
+mutation UpdateCalculationResult($id: UUID!, $calculatedResult: String!) @auth(level: USER) {
+  savedCalculation_update(key: {id: $id}, data: {calculatedResult: $calculatedResult})
+}
+
+query ListCategoriesForUser @auth(level: USER) {
+  categories(where: {userId_expr: "auth.uid"}) {
+    id
+    name
+    description
+  }
+}
