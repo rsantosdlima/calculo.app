@@ -42,7 +42,7 @@ export default function SalaryCalculator() {
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">Calculadora de Salário Líquido (2024)</h1>
+      <h1 className="text-2xl font-bold text-gray-800 mb-6">Calculadora de Salário Líquido (2025)</h1>
 
       <form onSubmit={handleCalculate} className="space-y-6 mb-8">
 
@@ -168,7 +168,10 @@ export default function SalaryCalculator() {
           </div>
 
           <div className="flex justify-between text-red-500">
-            <span>(-) IRRF</span>
+            <span>
+                (-) IRRF
+                {result.usedSimplified && <span className="text-xs ml-1 bg-green-100 text-green-800 px-1 rounded">Desc. Simplificado</span>}
+            </span>
             <span>R$ {result.irrf.toFixed(2)}</span>
           </div>
 
