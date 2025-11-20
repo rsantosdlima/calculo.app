@@ -168,7 +168,10 @@ export default function SalaryCalculator() {
           </div>
 
           <div className="flex justify-between text-red-500">
-            <span>(-) IRRF</span>
+            <span>
+                (-) IRRF
+                {result.usedSimplified && <span className="text-xs ml-1 bg-green-100 text-green-800 px-1 rounded">Desc. Simplificado</span>}
+            </span>
             <span>R$ {result.irrf.toFixed(2)}</span>
           </div>
 
