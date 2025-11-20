@@ -27,7 +27,7 @@ export default function AdSense({
 }: AdSenseProps) {
   const adRef = useRef<HTMLModElement>(null);
   const isProduction = process.env.NODE_ENV === "production";
-  const client = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "ca-pub-0000000000000000"; // Placeholder
+  const client = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "ca-pub-0000000000000000";
 
   useEffect(() => {
     try {
@@ -43,13 +43,9 @@ export default function AdSense({
 
   return (
     <div className={`adsense-container ${className}`}>
-       {/*
-         We render the script tag here conditionally or in Layout?
-         Usually better to put the main script in Layout (Next.js Script) and just the ins tag here.
-         I will assume the main script is added in Layout to avoid loading it multiple times.
-       */}
       <ins
         className="adsbygoogle"
+        ref={adRef}
         style={{ display: "block", ...style }}
         data-ad-client={client}
         data-ad-slot={slot}
@@ -58,7 +54,6 @@ export default function AdSense({
         data-ad-layout-key={layoutKey}
       ></ins>
 
-      {/* Fallback/Placeholder for Development */}
       {!isProduction && (
         <div className="bg-gray-100 border border-gray-300 text-gray-400 text-xs p-2 text-center mt-1">
             AdSense Placeholder (Slot: {slot})
