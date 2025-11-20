@@ -1,10 +1,10 @@
 import {
-  INSS_TABLE,
-  IRRF_TABLE,
-  DEPENDENT_DEDUCTION,
-  INSS_CEILING,
-  MINIMUM_WAGE,
-  SIMPLIFIED_DEDUCTION
+  INSS_TABLE_2025,
+  IRRF_TABLE_2025,
+  DEPENDENT_DEDUCTION_2025,
+  INSS_CEILING_2025,
+  MINIMUM_WAGE_2025,
+  IRRF_SIMPLIFIED_DISCOUNT_2025
 } from "./tax-tables";
 
 export enum AlimonyType {
@@ -47,8 +47,8 @@ export function calculateSalary(params: CalculationParams): CalculationResult {
       alimony = alimonyValue;
       irrfResult = calculateIRRF(grossSalary, inss, dependents, alimony);
     } else if (alimonyType === AlimonyType.PERCENT_MIN_WAGE) {
-      alimony = (alimonyValue / 100) * MINIMUM_WAGE;
-      const irrf = calculateIRRF(grossSalary, inss, dependents, alimony);
+      alimony = (alimonyValue / 100) * MINIMUM_WAGE_2025;
+      irrfResult = calculateIRRF(grossSalary, inss, dependents, alimony);
     } else if (alimonyType === AlimonyType.PERCENT_NET_SALARY) {
       // Circular dependency loop with Simplified check inside?
 
@@ -98,10 +98,10 @@ export function calculateSalary(params: CalculationParams): CalculationResult {
 
 export function calculateINSS(grossSalary: number): number {
   let inss = 0;
-  let remainder = Math.min(grossSalary, INSS_CEILING);
+  let remainder = Math.min(grossSalary, INSS_CEILING_2025);
   let previousLimit = 0;
 
-  for (const bracket of INSS_TABLE) {
+  for (const bracket of INSS_TABLE_2025) {
     if (remainder <= 0) break;
 
     const salaryInBracket = Math.min(grossSalary, bracket.limit) - previousLimit;
@@ -123,12 +123,12 @@ interface IRRFResult {
 
 export function calculateIRRF(grossSalary: number, inss: number, dependents: number, alimony: number): IRRFResult {
   // Strategy 1: Legal Deductions
-  const legalDeductions = inss + (dependents * DEPENDENT_DEDUCTION) + alimony;
+  const legalDeductions = inss + (dependents * DEPENDENT_DEDUCTION_2025) + alimony;
   const baseLegal = grossSalary - legalDeductions;
   const irrfLegal = calculateBaseIRRF(baseLegal);
 
   // Strategy 2: Simplified Discount
-  const simplifiedDeduction = SIMPLIFIED_DEDUCTION;
+  const simplifiedDeduction = IRRF_SIMPLIFIED_DISCOUNT_2025;
 
   // Compare deductions
   if (simplifiedDeduction > legalDeductions) {
@@ -147,7 +147,7 @@ function calculateBaseIRRF(baseSalary: number): number {
 
     let irrf = 0;
 
-    for (const bracket of IRRF_TABLE) {
+    for (const bracket of IRRF_TABLE_2025) {
         if (bracket.limit === null || baseSalary <= bracket.limit) {
             irrf = (baseSalary * bracket.rate) - bracket.deduction;
             break;
