@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AdSense from "@/components/AdSense";
 
 export default function Home() {
   return (
@@ -15,9 +16,12 @@ export default function Home() {
         </p>
       </section>
 
-      {/* Ad Placeholder (Top) */}
-      <div className="w-full h-24 bg-gray-200 rounded border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-500">
-        Espaço para Publicidade (Banner Horizontal)
+      {/* Ad Banner (Top) */}
+      <div className="w-full">
+        <AdSense
+           slot="0987654321"
+           style={{ minHeight: '100px' }}
+        />
       </div>
 
       {/* Categories Grid */}
