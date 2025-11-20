@@ -1,0 +1,35 @@
+type User @table {
+  displayName: String!
+  createdAt: Timestamp!
+  email: String
+  photoUrl: String
+}
+
+type CalculationType @table {
+  name: String!
+  description: String!
+  parametersSchema: String
+}
+
+type SavedCalculation @table {
+  name: String!
+  calculationType: CalculationType!
+  inputData: String!
+  calculatedResult: String!
+  createdAt: Timestamp!
+  user: User!
+  description: String
+}
+
+type Category @table {
+  name: String!
+  createdAt: Timestamp!
+  user: User!
+  description: String
+}
+
+type CalculationCategoryLink @table(key: ["savedCalculation", "category"]) {
+  savedCalculation: SavedCalculation!
+  category: Category!
+  createdAt: Timestamp!
+}
