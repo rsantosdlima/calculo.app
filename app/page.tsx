@@ -25,9 +25,9 @@ export default function Home() {
         <h2 className="text-2xl font-bold text-gray-800 mb-6">Calculadoras Populares</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-          {/* Card 1 */}
+          {/* Card 1 - Active */}
           <Link href="/calculadora-salario-liquido" className="block group">
-            <div className="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow border border-gray-100">
+            <div className="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow border border-gray-100 border-l-4 border-l-blue-500">
               <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                 $
               </div>
@@ -38,24 +38,24 @@ export default function Home() {
             </div>
           </Link>
 
-          {/* Card 2 - Placeholder */}
-          <div className="bg-white rounded-lg shadow p-6 border border-gray-100 opacity-60">
-            <div className="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4">
+          {/* Card 2 - Placeholder (Coming Soon) */}
+          <div className="bg-gray-50 rounded-lg shadow-sm p-6 border border-dashed border-gray-300">
+            <div className="w-12 h-12 bg-gray-200 text-gray-400 rounded-full flex items-center justify-center mb-4">
               %
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Correção Monetária</h3>
-            <p className="text-gray-600 text-sm">
+            <h3 className="text-lg font-semibold text-gray-500 mb-2">Correção Monetária</h3>
+            <p className="text-gray-400 text-sm">
               Em breve: Atualize valores pela inflação (IPCA, IGP-M).
             </p>
           </div>
 
-          {/* Card 3 - Placeholder */}
-          <div className="bg-white rounded-lg shadow p-6 border border-gray-100 opacity-60">
-            <div className="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mb-4">
+          {/* Card 3 - Placeholder (Coming Soon) */}
+          <div className="bg-gray-50 rounded-lg shadow-sm p-6 border border-dashed border-gray-300">
+            <div className="w-12 h-12 bg-gray-200 text-gray-400 rounded-full flex items-center justify-center mb-4">
               📅
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Dias entre Datas</h3>
-            <p className="text-gray-600 text-sm">
+            <h3 className="text-lg font-semibold text-gray-500 mb-2">Dias entre Datas</h3>
+            <p className="text-gray-400 text-sm">
                Em breve: Calcule a quantidade exata de dias, meses e anos.
             </p>
           </div>
