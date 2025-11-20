@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Calculo.App.br - Simulações e Cálculos Online",
+  title: "Calculo.App - Simulações e Cálculos Online",
   description: "Faça cálculos trabalhistas, financeiros e datas de forma simples e rápida.",
 };
 
