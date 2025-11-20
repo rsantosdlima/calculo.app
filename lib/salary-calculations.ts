@@ -3,9 +3,14 @@ import {
   IRRF_TABLE_2025,
   DEPENDENT_DEDUCTION_2025,
   INSS_CEILING_2025,
+<<<<<<< HEAD
   MINIMUM_WAGE_2025
   MINIMUM_WAGE_2025,
   IRRF_SIMPLIFIED_DISCOUNT_2025
+=======
+  MINIMUM_WAGE_2025,
+  SIMPLIFIED_DEDUCTION_2025
+>>>>>>> 3bc7849 (ajuste no cálculo do irrf para 2025 com dedução simplificada)
 } from "./tax-tables";
 
 export enum AlimonyType {
@@ -117,6 +122,7 @@ export function calculateINSS(grossSalary: number): number {
   return inss;
 }
 
+<<<<<<< HEAD
 interface IRRFResult {
     irrf: number;
     usedSimplified: boolean;
@@ -155,4 +161,28 @@ function calculateBaseIRRF(baseSalary: number): number {
         }
     }
     return Math.max(0, irrf);
+=======
+export function calculateIRRF(grossSalary: number, inss: number, dependents: number, alimony: number): number {
+  const dependentDeduction = dependents * DEPENDENT_DEDUCTION_2024;
+  // Se a soma das deduções for menor que a dedução simplificada, usa a dedução simplificada
+  let baseSalary: number;
+  if ((inss + dependentDeduction + alimony) < SIMPLIFIED_DEDUCTION_2025) {
+    baseSalary = grossSalary - SIMPLIFIED_DEDUCTION_2025;
+  } else {
+    baseSalary = grossSalary - inss - dependentDeduction - alimony;
+  }
+
+  if (baseSalary <= 0) return 0;
+
+  let irrf = 0;
+
+  for (const bracket of IRRF_TABLE_2024) {
+    if (bracket.limit === null || baseSalary <= bracket.limit) {
+      irrf = (baseSalary * bracket.rate) - bracket.deduction;
+      break;
+    }
+  }
+
+  return Math.max(0, irrf);
+>>>>>>> 3bc7849 (ajuste no cálculo do irrf para 2025 com dedução simplificada)
 }
