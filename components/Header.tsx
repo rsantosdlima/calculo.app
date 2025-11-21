@@ -7,7 +7,7 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="text-2xl font-bold text-blue-600">
-              Cálculo<span className="text-gray-800">.App.br</span>
+              Cálculo<span className="text-gray-800">.App</span>
             </Link>
           </div>
           <nav className="hidden md:flex space-x-4 lg:space-x-8">
@@ -23,11 +23,9 @@ export default function Header() {
                </button>
                <div className="absolute left-0 mt-0 w-56 bg-white rounded-md shadow-lg py-2 opacity-0 group-hover:opacity-100 transition-opacity invisible group-hover:visible border border-gray-100">
                   <Link href="/calculadora-salario-liquido" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
-                    Salário Líquido 2025
+                    Salário Líquido
                   </Link>
-                  <Link href="/calculadora-irrf-2026" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
-                    Simulação IRRF 2026
-                  </Link>
+                  {/* Future: Rescisão, Férias */}
                </div>
             </div>
 
@@ -41,6 +39,7 @@ export default function Header() {
                   <Link href="/calculadora-juros-simples" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
                     Juros Simples
                   </Link>
+                  {/* Future: Financiamento */}
                </div>
             </div>
 
