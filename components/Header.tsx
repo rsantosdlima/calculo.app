@@ -7,7 +7,7 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="text-2xl font-bold text-blue-600">
-              Cálculo<span className="text-gray-800">.App.br</span>
+              Cálculo<span className="text-gray-800">.App</span>
             </Link>
           </div>
           <nav className="hidden md:flex space-x-4 lg:space-x-8">
