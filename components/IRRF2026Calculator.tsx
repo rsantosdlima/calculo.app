@@ -22,11 +22,7 @@ export default function IRRF2026Calculator() {
       grossSalary: salary,
       dependents: numDependents,
       otherDiscounts: discounts,
-      hasAlimony: false, // For simplicity in this specific simulator as requested? Or add fields?
-      // The prompt didn't specify removing alimony inputs, but said "similar to net salary".
-      // For the sake of the "Side by Side" comparison focus, I'll keep it simple or replicate all inputs.
-      // Let's replicate basic inputs. Adding Alimony UI here adds complexity.
-      // If strictly needed, I can add. I'll stick to basic inputs for now to emphasize the IRRF change.
+      hasAlimony: false,
       alimonyType: AlimonyType.FIXED_VALUE,
       alimonyValue: 0
     });
@@ -116,7 +112,7 @@ export default function IRRF2026Calculator() {
                     <div className="absolute top-0 right-0 bg-green-500 text-white text-xs px-3 py-1 rounded-bl-lg font-bold">
                         NOVO
                     </div>
-                    <h3 className="text-lg font-bold text-green-800 mb-4 text-center">Simulação 2026</h3>
+                    <h3 className="text-lg font-bold text-green-800 mb-4 text-center">Simulação 2026 (PL 1.087)</h3>
                     <div className="space-y-3 text-sm">
                         <div className="flex justify-between text-gray-600">
                             <span>Salário Bruto</span>
