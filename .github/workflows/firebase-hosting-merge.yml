@@ -7,6 +7,8 @@ name: Deploy to Firebase Hosting on Merge
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_ADSENSE_CLIENT_ID: 'ca-pub-1844345151440140'
     steps:
       - uses: actions/checkout@v4
 
