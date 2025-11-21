@@ -25,7 +25,9 @@ export default function Page() {
                 </div>
                 <div className="ml-3">
                     <p className="text-sm text-yellow-700">
-                        <strong>Atenção:</strong> A tabela oficial de 2026 ainda não foi divulgada.
+                        <strong>Atenção:</strong> Este cálculo é uma simulação com base no Projeto de Lei (PL) 1.087/2025
+                        que ainda não foi sancionado, podendo haver alterações na legislação final.
+                        A tabela oficial de 2026 ainda não foi divulgada.
                         Esta simulação utiliza a tabela vigente de 2025 como base.
                     </p>
                 </div>
