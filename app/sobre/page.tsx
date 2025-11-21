@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Sobre Nós - Calculo.App",
-  description: "Conheça a história e a missão do Calculo.App",
+  title: "Sobre Nós - Calculo.App.br",
+  description: "Conheça a história e a missão do Calculo.App.br",
 };
 
 export default function AboutPage() {
@@ -12,7 +12,7 @@ export default function AboutPage() {
 
       <div className="space-y-6 text-gray-700 leading-relaxed">
         <p className="text-lg">
-          O <strong>Calculo.App</strong> nasceu de uma inquietação simples, mas poderosa: por que calcular coisas do dia a dia precisa ser tão complicado?
+          O <strong>Calculo.App.br</strong> nasceu de uma inquietação simples, mas poderosa: por que calcular coisas do dia a dia precisa ser tão complicado?
         </p>
 
         <p>
@@ -30,7 +30,7 @@ export default function AboutPage() {
         </p>
 
         <p>
-          Acreditamos que, com as ferramentas certas, todos podem tomar decisões melhores e mais conscientes. Bem-vindo ao Calculo.App: a matemática a seu favor, de forma simples.
+          Acreditamos que, com as ferramentas certas, todos podem tomar decisões melhores e mais conscientes. Bem-vindo ao Calculo.App.br: a matemática a seu favor, de forma simples.
         </p>
       </div>
     </div>

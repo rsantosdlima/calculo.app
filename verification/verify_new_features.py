@@ -10,7 +10,7 @@ def verify_new_features(page: Page):
     # 2. Verify Navigation to New Pages
     # Click "Sobre"
     page.get_by_role("link", name="Sobre").first.click()
-    expect(page).to_have_title("Sobre Nós - Calculo.App")
+    expect(page).to_have_title("Sobre Nós - Calculo.App.br")
     expect(page.locator("h1:has-text('Sobre Nós')")).to_be_visible()
 
     # Click "Contato"

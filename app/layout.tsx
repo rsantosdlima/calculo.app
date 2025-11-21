@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Calculo.App - Simulações e Cálculos Online",
+  title: "Calculo.App.br - Simulações e Cálculos Online",
   description: "Faça cálculos trabalhistas, financeiros e datas de forma simples e rápida.",
 };
 
@@ -34,7 +34,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-gray-50`}
       >
-        {/* Load AdSense Script globally */}
+        {/* Load AdSense Script globally - increased priority for debugging */}
         <Script
           async
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseId}`}

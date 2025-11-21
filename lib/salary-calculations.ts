@@ -1,11 +1,10 @@
 import {
-  INSS_TABLE,
-  IRRF_TABLE,
-  DEPENDENT_DEDUCTION,
-  INSS_CEILING,
-  MINIMUM_WAGE,
-  IRRF_SIMPLIFIED_DISCOUNT,
-  IRRF_2026_REDUCTION_TABLE
+  INSS_TABLE_2025,
+  IRRF_TABLE_2025,
+  DEPENDENT_DEDUCTION_2025,
+  INSS_CEILING_2025,
+  MINIMUM_WAGE_2025,
+  IRRF_SIMPLIFIED_DISCOUNT_2025
 } from "./tax-tables";
 
 export enum AlimonyType {
@@ -30,7 +29,7 @@ export interface CalculationResult {
   alimony: number;
   otherDiscounts: number;
   netSalary: number;
-  usedSimplified?: boolean; // Indica se usou dedução simplificada no IRRF
+  usedSimplified: boolean; // To display which method was used
 }
 
 export function calculateSalary(params: CalculationParams): CalculationResult {
@@ -46,71 +45,58 @@ export function calculateSalary(params: CalculationParams): CalculationResult {
   if (hasAlimony) {
     if (alimonyType === AlimonyType.FIXED_VALUE) {
       alimony = alimonyValue;
-      const irrfResult = calculateIRRFWithFlag(grossSalary, inss, dependents, alimony);
-      irrf = irrfResult.irrf;
-      usedSimplified = irrfResult.usedSimplified;
+      irrfResult = calculateIRRF(grossSalary, inss, dependents, alimony);
     } else if (alimonyType === AlimonyType.PERCENT_MIN_WAGE) {
-      alimony = (alimonyValue / 100) * MINIMUM_WAGE;
-      const irrfResult = calculateIRRFWithFlag(grossSalary, inss, dependents, alimony);
-      irrf = irrfResult.irrf;
-      usedSimplified = irrfResult.usedSimplified;
+      alimony = (alimonyValue / 100) * MINIMUM_WAGE_2025;
+      irrfResult = calculateIRRF(grossSalary, inss, dependents, alimony);
     } else if (alimonyType === AlimonyType.PERCENT_NET_SALARY) {
-      // Circular dependency loop with Simplified check inside?
-
+      // Circular dependency loop
       const percent = alimonyValue / 100;
       let currentIrrf = 0;
       let currentAlimony = 0;
       let currentUsedSimplified = false;
 
-      // Max loops to converge
       for (let i = 0; i < 10; i++) {
-        // Alimony = (Gross - INSS - IRRF) * %
         currentAlimony = (grossSalary - inss - currentIrrf) * percent;
+        const res = calculateIRRF(grossSalary, inss, dependents, currentAlimony);
 
-        // Calculate IRRF with new Alimony
-        const irrfResult = calculateIRRFWithFlag(grossSalary, inss, dependents, currentAlimony);
-        const newIrrf = irrfResult.irrf;
-
-        if (Math.abs(newIrrf - currentIrrf) < 0.01) {
-          currentIrrf = newIrrf;
-          currentUsedSimplified = irrfResult.usedSimplified;
+        if (Math.abs(res.irrf - currentIrrf) < 0.01) {
+          currentIrrf = res.irrf;
+          currentUsedSimplified = res.usedSimplified;
           break;
         }
 
-        currentIrrf = newIrrf;
-        currentUsedSimplified = irrfResult.usedSimplified;
+        currentIrrf = res.irrf;
+        currentUsedSimplified = res.usedSimplified;
       }
 
       alimony = currentAlimony;
-      irrf = currentIrrf;
-      usedSimplified = currentUsedSimplified;
+      irrfResult = { irrf: currentIrrf, usedSimplified: currentUsedSimplified };
     }
   } else {
-    const irrfResult = calculateIRRFWithFlag(grossSalary, inss, dependents, 0);
-    irrf = irrfResult.irrf;
-    usedSimplified = irrfResult.usedSimplified;
+    irrfResult = calculateIRRF(grossSalary, inss, dependents, 0);
   }
 
   // 3. Net Salary
-  const netSalary = grossSalary - inss - irrf - alimony - otherDiscounts;
+  const netSalary = grossSalary - inss - irrfResult.irrf - alimony - otherDiscounts;
 
   return {
     grossSalary,
     inss,
-    irrf,
+    irrf: irrfResult.irrf,
     alimony,
     otherDiscounts,
     netSalary,
-    usedSimplified
+    usedSimplified: irrfResult.usedSimplified
   };
 }
 
 export function calculateINSS(grossSalary: number): number {
   let inss = 0;
-  let remainder = Math.min(grossSalary, INSS_CEILING);
+  let remainder = Math.min(grossSalary, INSS_CEILING_2025);
   let previousLimit = 0;
 
-  for (const bracket of INSS_TABLE) {
+  for (const bracket of INSS_TABLE_2025) {
     if (remainder <= 0) break;
 
     const salaryInBracket = Math.min(grossSalary, bracket.limit) - previousLimit;
@@ -132,12 +118,12 @@ interface IRRFResult {
 
 export function calculateIRRF(grossSalary: number, inss: number, dependents: number, alimony: number): IRRFResult {
   // Strategy 1: Legal Deductions
-  const legalDeductions = inss + (dependents * DEPENDENT_DEDUCTION) + alimony;
+  const legalDeductions = inss + (dependents * DEPENDENT_DEDUCTION_2025) + alimony;
   const baseLegal = grossSalary - legalDeductions;
   const irrfLegal = calculateBaseIRRF(baseLegal);
 
   // Strategy 2: Simplified Discount
-  const simplifiedDeduction = IRRF_SIMPLIFIED_DISCOUNT;
+  const simplifiedDeduction = IRRF_SIMPLIFIED_DISCOUNT_2025;
 
   // Compare deductions
   if (simplifiedDeduction > legalDeductions) {
@@ -156,65 +142,11 @@ function calculateBaseIRRF(baseSalary: number): number {
 
     let irrf = 0;
 
-    for (const bracket of IRRF_TABLE) {
+    for (const bracket of IRRF_TABLE_2025) {
         if (bracket.limit === null || baseSalary <= bracket.limit) {
             irrf = (baseSalary * bracket.rate) - bracket.deduction;
             break;
         }
     }
     return Math.max(0, irrf);
-}
-
-// Faixas de redução IRRF 2026 (PL 1.087/2025)
-export const IRRF_2026_REDUCTION = [
-  {
-    min: 0,
-    max: 5000,
-    reduction: (grossSalary: number) => Math.min(312.89, grossSalary), // até R$ 312,89, imposto zero
-  },
-  {
-    min: 5000.01,
-    max: 7350,
-    reduction: (grossSalary: number) => 978.62 - (0.133145 * grossSalary),
-  }
-];
-
-// Novo cálculo IRRF 2026
-export function calculateIRRF2026(grossSalary: number, inss: number, dependents: number, alimony: number): { irrf: number, reduction: number, usedSimplified: boolean } {
-  const irrfResult = calculateIRRFWithFlag(grossSalary, inss, dependents, alimony);
-  let reduction = 0;
-  for (const faixa of IRRF_2026_REDUCTION_TABLE) {
-    if (grossSalary >= faixa.min && grossSalary <= faixa.max) {
-      if (faixa.maxReduction !== undefined) {
-        reduction = Math.min(faixa.maxReduction, irrfResult.irrf);
-      } else if (faixa.formula) {
-        reduction = Math.min(irrfResult.irrf, faixa.formula(grossSalary));
-      }
-      break;
-    }
-  }
-  const irrf2026 = Math.max(0, irrfResult.irrf - reduction);
-  return { irrf: irrf2026, reduction, usedSimplified: irrfResult.usedSimplified };
-}
-
-// Nova função para retornar IRRF e flag de dedução simplificada
-export function calculateIRRFWithFlag(grossSalary: number, inss: number, dependents: number, alimony: number): { irrf: number, usedSimplified: boolean } {
-  const dependentDeduction = dependents * DEPENDENT_DEDUCTION;
-  let baseSalary: number;
-  let usedSimplified = false;
-  if ((inss + dependentDeduction + alimony) < IRRF_SIMPLIFIED_DISCOUNT) {
-    baseSalary = grossSalary - IRRF_SIMPLIFIED_DISCOUNT;
-    usedSimplified = true;
-  } else {
-    baseSalary = grossSalary - inss - dependentDeduction - alimony;
-  }
-  if (baseSalary <= 0) return { irrf: 0, usedSimplified };
-  let irrf = 0;
-  for (const bracket of IRRF_TABLE) {
-    if (bracket.limit === null || baseSalary <= bracket.limit) {
-      irrf = (baseSalary * bracket.rate) - bracket.deduction;
-      break;
-    }
-  }
-  return { irrf: Math.max(0, irrf), usedSimplified };
 }

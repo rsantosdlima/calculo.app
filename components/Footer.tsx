@@ -6,7 +6,7 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Sobre Nós</h3>
             <p className="text-gray-300 text-sm">
-              Calculo.App oferece ferramentas de simulação e cálculo para facilitar o seu dia a dia.
+              Calculo.App.br oferece ferramentas de simulação e cálculo para facilitar o seu dia a dia.
             </p>
           </div>
           <div>
@@ -25,7 +25,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
-          &copy; {new Date().getFullYear()} Calculo.App. Todos os direitos reservados.
+          &copy; {new Date().getFullYear()} Calculo.App.br. Todos os direitos reservados.
         </div>
       </div>
     </footer>

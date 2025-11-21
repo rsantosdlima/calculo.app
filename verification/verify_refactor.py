@@ -3,7 +3,7 @@ from playwright.sync_api import Page, expect, sync_playwright
 def verify_homepage_and_calculator(page: Page):
     # 1. Navigate to Home
     page.goto("http://localhost:3000")
-    expect(page).to_have_title("Calculo.App - Simulações e Cálculos Online")
+    expect(page).to_have_title("Calculo.App.br - Simulações e Cálculos Online")
 
     # Check "Coming Soon" placeholders
     # Use specific locator to avoid strict mode violation (there is also a link in sidebar)
