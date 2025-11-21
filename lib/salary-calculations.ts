@@ -41,8 +41,7 @@ export function calculateSalary(params: CalculationParams): CalculationResult {
 
   // 2. Calculate Alimony & IRRF
   let alimony = 0;
-  let irrf = 0;
-  let usedSimplified = false;
+  let irrfResult = { irrf: 0, usedSimplified: false };
 
   if (hasAlimony) {
     if (alimonyType === AlimonyType.FIXED_VALUE) {

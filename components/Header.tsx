@@ -50,9 +50,9 @@ export default function Header() {
                   <svg className="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                </button>
                <div className="absolute left-0 mt-0 w-56 bg-white rounded-md shadow-lg py-2 opacity-0 group-hover:opacity-100 transition-opacity invisible group-hover:visible border border-gray-100">
-                  <span className="block px-4 py-2 text-sm text-gray-400 cursor-default">
-                    Dias entre Datas (Em breve)
-                  </span>
+                  <Link href="/calculadora-dias-entre-datas" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                    Dias entre Datas
+                  </Link>
                </div>
             </div>
 

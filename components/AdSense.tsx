@@ -34,12 +34,13 @@ export default function AdSense({
       // Only push ads if the script is loaded and we are in the browser
       // Check if the ad element is empty to prevent double injection in React Strict Mode
       if (adRef.current && adRef.current.innerHTML === "") {
+          console.log("AdSense: Pushing ad for slot", slot);
           (window.adsbygoogle = window.adsbygoogle || []).push({});
       }
     } catch (err) {
       console.error("AdSense Error:", err);
     }
-  }, []);
+  }, [slot]); // Added dependency
 
   return (
     <div className={`adsense-container ${className}`}>
