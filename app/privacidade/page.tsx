@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Política de Privacidade - Calculo.App.br",
-  description: "Política de privacidade e coleta de dados do Calculo.App.br",
+  title: "Política de Privacidade - Calculo.App",
+  description: "Política de privacidade e coleta de dados do Calculo.App",
 };
 
 export default function PrivacyPage() {
@@ -16,7 +16,7 @@ export default function PrivacyPage() {
 
       <h3>1. Introdução</h3>
       <p>
-        O <strong>Calculo.App.br</strong> compromete-se com a segurança e privacidade dos dados de seus usuários.
+        O <strong>Calculo.App</strong> compromete-se com a segurança e privacidade dos dados de seus usuários.
         Esta Política de Privacidade descreve como coletamos, usamos e protegemos suas informações pessoais ao utilizar nosso site e ferramentas.
       </p>
 
@@ -40,7 +40,7 @@ export default function PrivacyPage() {
 
       <h3>4. Publicidade e Cookies (Google AdSense)</h3>
       <p>
-        O Calculo.App.br utiliza o Google AdSense para exibir anúncios. O Google e seus parceiros utilizam cookies para veicular anúncios com base em suas visitas anteriores ao nosso site ou a outros sites na Internet.
+        O Calculo.App utiliza o Google AdSense para exibir anúncios. O Google e seus parceiros utilizam cookies para veicular anúncios com base em suas visitas anteriores ao nosso site ou a outros sites na Internet.
       </p>
       <p>
         Os usuários podem optar por não receber publicidade personalizada acessando as <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Configurações de Anúncios</a>.
