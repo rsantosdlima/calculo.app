@@ -1,6 +1,6 @@
 from playwright.sync_api import Page, expect, sync_playwright
 
-def verify_2025_tables(page: Page):
+def verify_tables(page: Page):
     page.goto("http://localhost:3000/calculadora-salario-liquido")
 
     # Test Case 1: INSS 2025 Range 1
@@ -53,14 +53,14 @@ def verify_2025_tables(page: Page):
     # We can check if "R$ 0.00" is visible generally (INSS is not 0).
     expect(page.locator("text=R$ 0.00")).to_be_visible()
 
-    page.screenshot(path="/home/jules/verification/tables_2025.png", full_page=True)
+    page.screenshot(path="/home/jules/verification/tables.png", full_page=True)
 
 if __name__ == "__main__":
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
         try:
-            verify_2025_tables(page)
+            verify_tables(page)
             print("Verification successful")
         except Exception as e:
             print(f"Verification failed: {e}")
