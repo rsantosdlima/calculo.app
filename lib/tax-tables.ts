@@ -32,3 +32,11 @@ export const DEPENDENT_DEDUCTION_2025 = 189.59;
 export const INSS_CEILING_2025 = 8157.41;
 export const MINIMUM_WAGE_2025 = 1518.00;
 export const IRRF_SIMPLIFIED_DISCOUNT_2025 = 607.20;
+
+// PL 1.087/2025 - IRRF Reduction Parameters
+export const PL_2025_REDUCTION_TIER_1_LIMIT = 5000.00;
+export const PL_2025_REDUCTION_TIER_1_VALUE = 312.89; // Reduction for <= 5000 (to zero tax effectively)
+
+export const PL_2025_REDUCTION_TIER_2_LIMIT = 7350.00;
+export const PL_2025_REDUCTION_TIER_2_FIXED = 978.62;
+export const PL_2025_REDUCTION_TIER_2_FACTOR = 0.133145;
