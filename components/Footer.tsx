@@ -24,8 +24,9 @@ export default function Footer() {
             </p>
           </div>
         </div>
-        <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
-          &copy; {new Date().getFullYear()} Calculo.App.br. Todos os direitos reservados.
+        <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400 flex justify-between flex-col md:flex-row items-center">
+          <span>&copy; {new Date().getFullYear()} Calculo.App.br. Todos os direitos reservados.</span>
+          <span className="text-gray-600 text-xs mt-2 md:mt-0">v1.1.0 (2025 Update)</span>
         </div>
       </div>
     </footer>
