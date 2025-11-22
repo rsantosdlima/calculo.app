@@ -8,8 +8,7 @@ import {
 
 export type AlimonyType = "fixed" | "percentage";
 
-// --- NOVA INTERFACE ADICIONADA ---
-// Isso corrige o erro de importação em outros arquivos
+// Interface para os parâmetros de entrada (agrupados)
 export interface CalculationParams {
   grossSalary: number;
   numDependents: number;
@@ -20,7 +19,6 @@ export interface CalculationParams {
   alimonyPercentage: number;
   alimonyBaseValue: number;
 }
-// --------------------------------
 
 export interface CalculationResult {
   grossSalary: number;
@@ -65,18 +63,19 @@ const calculateIRRF = (baseSalary: number): number => {
   return 0;
 };
 
-// --- FUNÇÃO PRINCIPAL EXPORTADA ---
+// --- FUNÇÃO PRINCIPAL EXPORTADA (REFATORADA) ---
 
-export function calculateSalary(
-  grossSalary: number,
-  numDependents: number,
-  otherDiscounts: number,
-  hasAlimony: boolean,
-  alimonyType: AlimonyType,
-  alimonyFixedValue: number,
-  alimonyPercentage: number,
-  alimonyBaseValue: number
-): CalculationResult {
+// Agora aceita um único objeto 'params' e desestrutura as propriedades
+export function calculateSalary({
+  grossSalary,
+  numDependents,
+  otherDiscounts,
+  hasAlimony,
+  alimonyType,
+  alimonyFixedValue,
+  alimonyPercentage,
+  alimonyBaseValue,
+}: CalculationParams): CalculationResult {
   // 1. Calcula INSS
   const inssDiscount = calculateINSS(grossSalary);
 
@@ -86,24 +85,20 @@ export function calculateSalary(
     if (alimonyType === "fixed") {
       alimonyDiscount = alimonyFixedValue;
     } else {
-      // Se a base for 0 ou não informada, usa o salário bruto como padrão
       const base = alimonyBaseValue > 0 ? alimonyBaseValue : grossSalary;
       alimonyDiscount = base * (alimonyPercentage / 100);
     }
   }
 
   // 3. Calcula IRRF (Comparativo)
-  // Base Legal: Bruto - INSS - Dependentes - Pensão
   const totalDependentDeduction = numDependents * DEPENDENT_DEDUCTION;
   const irrfBaseLegal =
     grossSalary - inssDiscount - totalDependentDeduction - alimonyDiscount;
   const irrfLegal = calculateIRRF(irrfBaseLegal);
 
-  // Base Simplificada: Bruto - Desconto Padrão (Pensão NÃO deduz aqui)
   const irrfBaseSimplified = grossSalary - IRRF_SIMPLIFIED_DISCOUNT;
   const irrfSimplified = calculateIRRF(irrfBaseSimplified);
 
-  // Escolhe o mais vantajoso
   let irrfDiscount = 0;
   let usedSimplifiedDiscount = false;
   let finalIrrfBase = 0;

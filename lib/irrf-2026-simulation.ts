@@ -1,60 +1,63 @@
 import {
-  PL_REDUCTION_TIER_1_LIMIT,
+  PL_PROPOSED_LIMIT_TIER_1,
   PL_REDUCTION_TIER_1_VALUE,
-  PL_REDUCTION_TIER_2_LIMIT,
-  PL_REDUCTION_TIER_2_FIXED,
+  PL_PROPOSED_LIMIT_TIER_2,
   PL_REDUCTION_TIER_2_FACTOR
 } from "./tax-tables";
 import { calculateSalary, CalculationParams, CalculationResult } from "./salary-calculations";
 
 export interface ComparisonResult {
   current2025: CalculationResult;
-  simulated2026: CalculationResult & {
-    reductionAmount: number; // How much tax was saved
-  };
-  monthlyGain: number;
-  yearlyGain: number;
+  proposed2026: CalculationResult;
+  difference: number;
+  proposedRuleApplied: boolean;
+  tierApplied: 1 | 2 | null;
 }
 
 export function calculateSimulation2026(params: CalculationParams): ComparisonResult {
-  // 1. Calculate standard 2025 scenario
+  // 1. Calcula cenário padrão de 2025
   const current2025 = calculateSalary(params);
 
-  // 2. Calculate 2026 scenario based on 2025 result + adjustments
-  // The 2026 proposal REDUCES the IRRF calculated under current rules (or 2025 rules).
-  // So we start with the IRRF from step 1.
+  // 2. Calcula cenário 2026 baseado no resultado de 2025 + ajustes
+  // A proposta de 2026 REDUZ o IRRF calculado sob as regras atuais.
 
-  const irrfBase = current2025.irrf;
-  let reduction = 0;
-  const gross = params.grossSalary;
+  let proposedIRRF = current2025.irrfDiscount;
+  let proposedRuleApplied = false;
+  let tierApplied: 1 | 2 | null = null;
+  const grossSalary = params.grossSalary;
 
-  if (gross <= PL_REDUCTION_TIER_1_LIMIT) {
-    // For salaries up to 5000, subtract up to 312.89.
-    reduction = Math.min(irrfBase, PL_REDUCTION_TIER_1_VALUE);
-  } else if (gross <= PL_REDUCTION_TIER_2_LIMIT) {
-    // Range 5000.01 to 7350.00
-    const calculatedReduction = PL_REDUCTION_TIER_2_FIXED - (PL_REDUCTION_TIER_2_FACTOR * gross);
-    reduction = Math.max(0, calculatedReduction);
-    reduction = Math.min(irrfBase, reduction);
-  } else {
-    // Above 7350, no specific reduction.
-    reduction = 0;
+  if (grossSalary <= PL_PROPOSED_LIMIT_TIER_1) {
+    // Faixa 1: Redução fixa de R$ 600,00 no imposto devido
+    proposedIRRF = Math.max(0, current2025.irrfDiscount - PL_REDUCTION_TIER_1_VALUE);
+    proposedRuleApplied = true;
+    tierApplied = 1;
+  } else if (grossSalary <= PL_PROPOSED_LIMIT_TIER_2) {
+    // Faixa 2: Redução variável (fator 0.25)
+    // O texto do PL é complexo aqui, mas a interpretação mais comum para simulação
+    // é uma redução gradual que zera no limite superior.
+    // Simplificação para simulação: Redução linear proporcional
+    const reduction = PL_REDUCTION_TIER_1_VALUE * (1 - ((grossSalary - PL_PROPOSED_LIMIT_TIER_1) / (PL_PROPOSED_LIMIT_TIER_2 - PL_PROPOSED_LIMIT_TIER_1)));
+
+    proposedIRRF = Math.max(0, current2025.irrfDiscount - reduction);
+    proposedRuleApplied = true;
+    tierApplied = 2;
   }
+  // Se maior que TIER_2, mantém o IRRF atual (proposedIRRF já começa com esse valor)
 
-  const irrf2026 = Math.max(0, irrfBase - reduction);
+  const difference = current2025.irrfDiscount - proposedIRRF;
+  const proposedNetSalary = current2025.netSalary + difference;
 
-  // Recalculate Net Salary for 2026
-  const net2026 = params.grossSalary - current2025.inss - irrf2026 - current2025.alimony - params.otherDiscounts;
+  const proposed2026: CalculationResult = {
+    ...current2025,
+    irrfDiscount: proposedIRRF,
+    netSalary: proposedNetSalary
+  };
 
   return {
     current2025,
-    simulated2026: {
-      ...current2025,
-      irrf: irrf2026,
-      netSalary: net2026,
-      reductionAmount: reduction
-    },
-    monthlyGain: net2026 - current2025.netSalary,
-    yearlyGain: (net2026 - current2025.netSalary) * 13.33
+    proposed2026,
+    difference,
+    proposedRuleApplied,
+    tierApplied
   };
 }

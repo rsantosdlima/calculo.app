@@ -5,6 +5,7 @@ import {
   calculateSalary,
   CalculationResult,
   AlimonyType,
+  CalculationParams,
 } from "@/lib/salary-calculations";
 
 export default function SalaryCalculator() {
@@ -16,7 +17,7 @@ export default function SalaryCalculator() {
   // Alimony Inputs
   const [hasAlimony, setHasAlimony] = useState(false);
   const [alimonyType, setAlimonyType] = useState<AlimonyType>("fixed");
-  const [alimonyValueStr, setAlimonyValueStr] = useState(""); // For fixed value or percentage base
+  const [alimonyValueStr, setAlimonyValueStr] = useState("");
   const [alimonyPercentageStr, setAlimonyPercentageStr] = useState("");
 
   const [result, setResult] = useState<CalculationResult | null>(null);
@@ -55,29 +56,28 @@ export default function SalaryCalculator() {
           parseFloat(alimonyValueStr.replace(/\./g, "").replace(",", ".")) || 0;
       } else {
         alimonyPercentage = parseFloat(alimonyPercentageStr.replace(",", ".")) || 0;
-        // Base value is usually the gross salary, or net salary, but for simplification here we take an input if needed, or assume gross.
-        // Let's assume the user enters the base value in the same input field for simplicity in UI, or we use grossSalary.
-        // A more complex UI would ask "Percentage of what?". Let's stick to a simpler interpretation first.
-        // If percentage, we need a base. Let's assume the input `alimonyValueStr` is used as base if type is percentage.
         alimonyBaseValue = parseFloat(alimonyValueStr.replace(/\./g, "").replace(",", ".")) || 0;
         
         if (alimonyBaseValue <= 0) {
-             alimonyBaseValue = grossSalary; // Fallback to gross if no base provided
+             alimonyBaseValue = grossSalary;
         }
       }
     }
 
-    // 3. Call Calculation Logic from Lib
-    const calculationResult = calculateSalary(
-      grossSalary,
-      numDependents,
-      otherDiscounts,
-      hasAlimony,
-      alimonyType,
-      alimonyFixedValue,
-      alimonyPercentage,
-      alimonyBaseValue
-    );
+    // 3. Preparar objeto de parâmetros
+    const params: CalculationParams = {
+        grossSalary,
+        numDependents,
+        otherDiscounts,
+        hasAlimony,
+        alimonyType,
+        alimonyFixedValue,
+        alimonyPercentage,
+        alimonyBaseValue
+    };
+
+    // 4. Call Calculation Logic
+    const calculationResult = calculateSalary(params);
 
     setResult(calculationResult);
   };
@@ -257,7 +257,7 @@ export default function SalaryCalculator() {
                         id="sc-alimonyBase"
                         placeholder={`Padrão: ${salaryStr || 'Salário Bruto'}`}
                         className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 border p-2 bg-white text-gray-900 text-base md:text-sm"
-                        value={alimonyValueStr} // Reusing this state for base value input if percentage
+                        value={alimonyValueStr}
                         onChange={(e) => setAlimonyValueStr(e.target.value)}
                       />
                        <p className="text-xs text-gray-500 mt-1">Deixe em branco para usar o Salário Bruto.</p>
