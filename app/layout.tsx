@@ -1,3 +1,5 @@
+// CAMINHO: app/layout.tsx
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
@@ -6,7 +8,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AdSense from "@/components/AdSense";
 import CookieConsent from "@/components/CookieConsent";
-// IMPORTAÇÃO ADICIONADA: Necessária para os links da sidebar
 import Link from "next/link";
 
 const geistSans = Geist({
@@ -21,7 +22,14 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Calculo.App - Simulações e Cálculos Online",
-  description: "Faça cálculos trabalhistas, financeiros e datas de forma simples e rápida.",
+  description:
+    "Faça cálculos trabalhistas, financeiros e datas de forma simples e rápida.",
+  // ADICIONADO: Configuração dos ícones (Favicon e App Icon)
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png", // Para iPhone/iPad
+  },
 };
 
 export default function RootLayout({
@@ -29,7 +37,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "ca-pub-0000000000000000";
+  const adsenseId =
+    process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "ca-pub-0000000000000000";
 
   return (
     <html lang="pt-BR">
@@ -47,45 +56,52 @@ export default function RootLayout({
         <Header />
 
         {/* Main Layout with Ad placeholders */}
-        <div className="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-
             {/* Main Content Area */}
-            <main className="lg:col-span-3">
-              {children}
-            </main>
+            <main className="lg:col-span-3">{children}</main>
 
             {/* Sidebar / Ad Space */}
             <aside className="hidden lg:block lg:col-span-1">
               <div className="bg-white p-4 rounded shadow mb-4">
                 {/* Sidebar Ad Slot */}
-                {/* LEMBRETE: Substitua "1234567890" pelo ID real do seu bloco de anúncio vertical/quadrado */}
                 <AdSense
-                  slot="1234567890"
+                  slot="3207121991"
                   format="auto"
-                  style={{ minHeight: '250px' }}
+                  style={{ minHeight: "250px" }}
                 />
               </div>
               <div className="bg-white p-4 rounded shadow">
-                  <h3 className="font-bold text-gray-700 mb-2">Mais acessados</h3>
-                  {/* LINKS CORRIGIDOS: Usando o componente Link do Next.js */}
-                  <ul className="text-sm space-y-2 text-blue-600">
-                    <li>
-                        <Link href="/calculadora-salario-liquido" className="hover:underline">
-                            Salário Líquido
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/calculadora-horas-extras" className="hover:underline">
-                            Horas Extras
-                        </Link>
-                    </li>
-                     <li>
-                        <Link href="/tabelas-inss-irpf" className="hover:underline">
-                            Tabelas INSS/IRPF
-                        </Link>
-                    </li>
-                  </ul>
+                <h3 className="font-bold text-gray-700 mb-2">Mais acessados</h3>
+                <ul className="text-sm space-y-2 text-blue-600">
+                  <li>
+                    <Link
+                      href="/calculadora-salario-liquido"
+                      className="hover:underline"
+                      title="Ir para Calculadora de Salário Líquido"
+                    >
+                      Salário Líquido
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/calculadora-horas-extras"
+                      className="hover:underline"
+                      title="Ir para Calculadora de Horas Extras"
+                    >
+                      Horas Extras
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/tabelas-inss-irpf"
+                      className="hover:underline"
+                      title="Ver Tabelas INSS e IRPF"
+                    >
+                      Tabelas INSS/IRPF
+                    </Link>
+                  </li>
+                </ul>
               </div>
             </aside>
           </div>
