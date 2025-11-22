@@ -8,7 +8,7 @@ import {
 
 export type AlimonyType = "fixed" | "percentage";
 
-// Interface para os parâmetros de entrada (agrupados)
+// Interface para os parâmetros de entrada (IMPORTANTE: DEVE ESTAR EXPORTADA)
 export interface CalculationParams {
   grossSalary: number;
   numDependents: number;
@@ -63,9 +63,8 @@ const calculateIRRF = (baseSalary: number): number => {
   return 0;
 };
 
-// --- FUNÇÃO PRINCIPAL EXPORTADA (REFATORADA) ---
+// --- FUNÇÃO PRINCIPAL EXPORTADA ---
 
-// Agora aceita um único objeto 'params' e desestrutura as propriedades
 export function calculateSalary({
   grossSalary,
   numDependents,
@@ -91,14 +90,17 @@ export function calculateSalary({
   }
 
   // 3. Calcula IRRF (Comparativo)
+  // Base Legal: Bruto - INSS - Dependentes - Pensão
   const totalDependentDeduction = numDependents * DEPENDENT_DEDUCTION;
   const irrfBaseLegal =
     grossSalary - inssDiscount - totalDependentDeduction - alimonyDiscount;
   const irrfLegal = calculateIRRF(irrfBaseLegal);
 
+  // Base Simplificada: Bruto - Desconto Padrão (Pensão NÃO deduz aqui)
   const irrfBaseSimplified = grossSalary - IRRF_SIMPLIFIED_DISCOUNT;
   const irrfSimplified = calculateIRRF(irrfBaseSimplified);
 
+  // Escolhe o mais vantajoso
   let irrfDiscount = 0;
   let usedSimplifiedDiscount = false;
   let finalIrrfBase = 0;

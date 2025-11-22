@@ -1,9 +1,11 @@
 import {
-  PL_PROPOSED_LIMIT_TIER_1,
+  PL_REDUCTION_TIER_1_LIMIT,
   PL_REDUCTION_TIER_1_VALUE,
-  PL_PROPOSED_LIMIT_TIER_2,
+  PL_REDUCTION_TIER_2_LIMIT,
+  PL_REDUCTION_TIER_2_CONSTANT,
   PL_REDUCTION_TIER_2_FACTOR
 } from "./tax-tables";
+// Importa as interfaces e função corretamente
 import { calculateSalary, CalculationParams, CalculationResult } from "./salary-calculations";
 
 export interface ComparisonResult {
@@ -11,41 +13,51 @@ export interface ComparisonResult {
   proposed2026: CalculationResult;
   difference: number;
   proposedRuleApplied: boolean;
-  tierApplied: 1 | 2 | null;
+  reductionValue: number; // Valor exato da redução aplicada
 }
 
 export function calculateSimulation2026(params: CalculationParams): ComparisonResult {
-  // 1. Calcula cenário padrão de 2025
+  // 1. Calcula o cenário padrão de 2025 (para obter o IRRF atual)
   const current2025 = calculateSalary(params);
-
-  // 2. Calcula cenário 2026 baseado no resultado de 2025 + ajustes
-  // A proposta de 2026 REDUZ o IRRF calculado sob as regras atuais.
-
-  let proposedIRRF = current2025.irrfDiscount;
-  let proposedRuleApplied = false;
-  let tierApplied: 1 | 2 | null = null;
   const grossSalary = params.grossSalary;
+  const currentIRRF = current2025.irrfDiscount;
 
-  if (grossSalary <= PL_PROPOSED_LIMIT_TIER_1) {
-    // Faixa 1: Redução fixa de R$ 600,00 no imposto devido
-    proposedIRRF = Math.max(0, current2025.irrfDiscount - PL_REDUCTION_TIER_1_VALUE);
-    proposedRuleApplied = true;
-    tierApplied = 1;
-  } else if (grossSalary <= PL_PROPOSED_LIMIT_TIER_2) {
-    // Faixa 2: Redução variável (fator 0.25)
-    // O texto do PL é complexo aqui, mas a interpretação mais comum para simulação
-    // é uma redução gradual que zera no limite superior.
-    // Simplificação para simulação: Redução linear proporcional
-    const reduction = PL_REDUCTION_TIER_1_VALUE * (1 - ((grossSalary - PL_PROPOSED_LIMIT_TIER_1) / (PL_PROPOSED_LIMIT_TIER_2 - PL_PROPOSED_LIMIT_TIER_1)));
+  // 2. Calcula o valor da REDUÇÃO baseado na faixa salarial (PL 1087/2025)
+  let reductionValue = 0;
+  let proposedRuleApplied = false;
 
-    proposedIRRF = Math.max(0, current2025.irrfDiscount - reduction);
+  if (grossSalary <= PL_REDUCTION_TIER_1_LIMIT) {
+    // FAIXA 1 (Até R$ 5.000,00): Redução fixa de R$ 312,89
+    reductionValue = PL_REDUCTION_TIER_1_VALUE;
     proposedRuleApplied = true;
-    tierApplied = 2;
+
+  } else if (grossSalary <= PL_REDUCTION_TIER_2_LIMIT) {
+    // FAIXA 2 (De R$ 5.000,01 a R$ 7.350,00): Fórmula
+    // Redução = 978,62 - (0,133145 * Salário Bruto)
+    reductionValue = PL_REDUCTION_TIER_2_CONSTANT - (PL_REDUCTION_TIER_2_FACTOR * grossSalary);
+    // Garante que a redução não seja negativa (embora a fórmula deva garantir isso nessa faixa)
+    reductionValue = Math.max(0, reductionValue);
+    proposedRuleApplied = true;
+
+  } else {
+    // FAIXA 3 (Acima de R$ 7.350,00): Sem redução
+    reductionValue = 0;
+    proposedRuleApplied = false;
   }
-  // Se maior que TIER_2, mantém o IRRF atual (proposedIRRF já começa com esse valor)
 
-  const difference = current2025.irrfDiscount - proposedIRRF;
-  const proposedNetSalary = current2025.netSalary + difference;
+  // 3. Aplica a redução ao IRRF atual
+  // O valor da redução não pode ser maior que o próprio imposto devido.
+  const finalReduction = Math.min(currentIRRF, reductionValue);
+  const proposedIRRF = currentIRRF - finalReduction;
+
+  // 4. Recalcula o salário líquido com o novo IRRF
+  // Salário Líquido = Bruto - INSS - Novo IRRF - Pensão - Outros
+  const proposedNetSalary =
+    grossSalary -
+    current2025.inssDiscount -
+    proposedIRRF -
+    current2025.alimonyDiscount -
+    current2025.otherDiscounts;
 
   const proposed2026: CalculationResult = {
     ...current2025,
@@ -56,8 +68,8 @@ export function calculateSimulation2026(params: CalculationParams): ComparisonRe
   return {
     current2025,
     proposed2026,
-    difference,
+    difference: finalReduction, // A diferença é o próprio valor da redução aplicada
     proposedRuleApplied,
-    tierApplied
+    reductionValue: finalReduction
   };
 }
