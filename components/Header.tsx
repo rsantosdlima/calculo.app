@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 export default function Header() {
   const pathname = usePathname();
@@ -42,7 +43,7 @@ export default function Header() {
         : "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800"
     }`;
 
-  // Ícones SVG
+  // Ícones SVG (Bars3, XMark, ChevronDown)
   const Bars3Icon = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -93,23 +94,6 @@ export default function Header() {
     </svg>
   );
 
-  const LogoIcon = (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth="2"
-      stroke="currentColor"
-      className="w-6 h-6 text-white"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25v-.008zm2.25-4.5h.008v.008H10.5v-.008zm0 2.25h.008v.008H10.5v-.008zm0 2.25h.008v.008H10.5v-.008zm2.25-4.5h.008v.008H12.75v-.008zm0 2.25h.008v.008H12.75v-.008zm0 2.25h.008v.008H12.75v-.008zm2.25-4.5h.008v.008H15v-.008zm0 2.25h.008v.008H15v-.008zm0 2.25h.008v.008H15v-.008zM2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M4.5 12.75h.008v.008H4.5v-.008zm0 2.25h.008v.008H4.5v-.008z"
-      />
-    </svg>
-  );
-
   return (
     <header
       className={`bg-white sticky top-0 z-40 transition-all duration-300 border-b border-gray-100 ${
@@ -122,16 +106,23 @@ export default function Header() {
           <div className="flex">
             <Link
               href="/"
-              // CORREÇÃO AQUI: alterado de flex-shrink-0 para shrink-0
               className="shrink-0 flex items-center group"
               aria-label="Voltar para a página inicial"
             >
-              <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center mr-3 shadow-sm group-hover:bg-blue-700 transition-colors">
-                {LogoIcon}
-              </div>
-              <span className="font-bold text-2xl text-gray-900">
-                Calculo.App
-              </span>
+              <Image
+                src="/logo-header.png" // Certifique-se que o nome do arquivo na pasta public é este
+                alt="Logo Calculo.App"
+                // Valores base para manter a proporção correta
+                width={160}
+                height={40}
+                // Classes do Tailwind:
+                // h-10: Força a altura visual para 2.5rem (40px)
+                // w-auto: Deixa a largura se ajustar automaticamente para manter a proporção
+                // mr-3: Mantém a margem à direita
+                // object-contain: Garante que a imagem inteira caiba na área sem cortar
+                className="h-10 w-auto mr-3 object-contain"
+                priority // Carrega com prioridade máxima
+              />
             </Link>
           </div>
 
@@ -162,12 +153,6 @@ export default function Header() {
                     </Link>
                     <Link
                       href="/calculadora-ferias"
-                      className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all"
-                    >
-                      Férias
-                    </Link>
-                    <Link
-                      href="/calculadora-rescisao"
                       className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all"
                     >
                       Rescisão CLT
