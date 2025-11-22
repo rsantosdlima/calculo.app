@@ -29,7 +29,21 @@ export default function Home() {
         <h2 className="text-2xl font-bold text-gray-800 mb-6">Calculadoras Populares</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-          {/* Card 1 - Salary */}
+          {/* Card 1 - IRRF 2026 */}
+          <Link href="/calculadora-irrf-2026" className="block group">
+          <div className="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow border border-gray-100 border-l-4 border-l-red-500">
+            <div className="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center mb-4 group-hover:bg-red-600 group-hover:text-white transition-colors">
+              📅
+            </div>
+            <h3 className="text-lg font-semibold text-gray-500 mb-2">Simulador IRRF 2026 - Projeto de Lei (PL) nº 1087/2025</h3>
+            <p className="text-gray-400 text-sm">
+               Entenda como a proposta do Governo Federal altera o cálculo do IRRF, 
+               garantindo isenção efetiva para quem ganha até R$ 5.000 e reduzindo o imposto da classe média.
+            </p>
+          </div>
+          </Link>
+          
+          {/* Card 2 - Salary */}
           <Link href="/calculadora-salario-liquido" className="block group">
             <div className="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow border border-gray-100 border-l-4 border-l-blue-500">
               <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
@@ -42,7 +56,7 @@ export default function Home() {
             </div>
           </Link>
 
-          {/* Card 2 - Simple Interest */}
+          {/* Card 3 - Simple Interest */}
           <Link href="/calculadora-juros-simples" className="block group">
             <div className="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow border border-gray-100 border-l-4 border-l-green-500">
                 <div className="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4 group-hover:bg-green-600 group-hover:text-white transition-colors">
@@ -54,20 +68,8 @@ export default function Home() {
                 </p>
             </div>
           </Link>
-
-          {/* Card 3 - Placeholder (Coming Soon) */}
-          <div className="bg-gray-50 rounded-lg shadow-sm p-6 border border-dashed border-gray-300">
-            <div className="w-12 h-12 bg-gray-200 text-gray-400 rounded-full flex items-center justify-center mb-4">
-              📅
-            </div>
-            <h3 className="text-lg font-semibold text-gray-500 mb-2">Dias entre Datas</h3>
-            <p className="text-gray-400 text-sm">
-               Em breve: Calcule a quantidade exata de dias, meses e anos.
-            </p>
           </div>
-
-        </div>
-      </section>
+        </section>
     </div>
   );
 }
