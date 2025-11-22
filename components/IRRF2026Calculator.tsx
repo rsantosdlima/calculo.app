@@ -212,7 +212,7 @@ export default function IRRF2026Calculator() {
                   A MENOS de imposto todo mês.
                 </p>
 
-                {result.proposed2026.irrfDiscount === 0 >&& (
+                {result.proposed2026.irrfDiscount === 0 && (
                   <p className="mt-4 inline-block bg-green-200 text-green-900 px-4 py-2 rounded-full font-bold text-sm uppercase tracking-wide">
                     ✨ Isenção total alcançada ✨
                   </p>
