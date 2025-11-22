@@ -27,15 +27,24 @@ describe('SimpleInterestCalculator (Componente)', () => {
     expect(screen.queryByText(/Resultado da Simulação/i)).not.toBeInTheDocument();
   });
 
-  it('deve exibir um alerta se tentar calcular com campos vazios', async () => {
+  it('deve exibir um alerta se tentar calcular com valores não numéricos (ex: texto)', async () => {
     render(<SimpleInterestCalculator />);
     const user = userEvent.setup();
+
+    // 1. Preencher com texto inválido para passar pelo 'required' do HTML
+    // mas cair na validação do isNaN do JavaScript
+    const principalInput = screen.getByLabelText(/Valor Principal/i);
+    await user.type(principalInput, 'abc'); // Digitando letras num campo de valor
+
+    // Os outros podem ficar vazios ou também com texto,
+    // o importante é que o JS pegue o erro.
 
     const calculateButton = screen.getByRole('button', { name: /Calcular Juros/i });
     await user.click(calculateButton);
 
-    // Verifica se o alert foi chamado
+    // 3. Agora sim, esperamos que o JS tenha rodado e chamado o alert
     expect(window.alert).toHaveBeenCalledWith(expect.stringContaining('preencha os campos com valores numéricos'));
+    
     // Verifica se o resultado continua escondido
     expect(screen.queryByText(/Resultado da Simulação/i)).not.toBeInTheDocument();
   });
