@@ -39,7 +39,7 @@ export async function POST(request: Request) {
       to: [recipientEmail],
 
       // Importante: Permite que você clique em "Responder" no Gmail e vá direto para o usuário que preencheu
-      reply_to: email,
+      replyTo: email,
 
       // Assunto do e-mail
       subject: `[Calculo.App] Novo Contato: ${subject || "Sem assunto"}`,

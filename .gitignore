@@ -39,3 +39,21 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Build do Next.js
+.next/
+out/
+build/
+dist/
+
+# Artefatos e cache do Firebase
+.firebase/
+firebase-debug.log*
+firebase-emulators.log*
+
+# Dependências (já deve ter, mas confira)
+node_modules/
+
+# Arquivos de ambiente locais (segurança!)
+.env*.local
+.env 
