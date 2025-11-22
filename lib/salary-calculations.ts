@@ -1,5 +1,3 @@
-// CAMINHO: components/SalaryCalculator.tsx
-
 "use client";
 
 import { useState } from "react";
@@ -24,7 +22,7 @@ interface CalculationResult {
 export default function SalaryCalculator() {
   const [salaryStr, setSalaryStr] = useState("");
   const [dependents, setDependents] = useState("0");
-  const [alimonyStr, setAlimonyStr] = useState("0"); // Campo de Pensão Restaurado
+  const [alimonyStr, setAlimonyStr] = useState("0");
   const [otherDiscountsStr, setOtherDiscountsStr] = useState("0");
   const [result, setResult] = useState<CalculationResult | null>(null);
 

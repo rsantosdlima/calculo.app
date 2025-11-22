@@ -1,61 +1,110 @@
-import SalaryCalculator from "@/components/SalaryCalculator";
+import type { Metadata } from "next";
 import AdSense from "@/components/AdSense";
-import type { Metadata } from 'next'
 import Link from "next/link";
+import SalaryCalculator from "@/components/SalaryCalculator";
 
 export const metadata: Metadata = {
-  title: 'Calculadora de salário líquido 2025 online | Descontos de INSS e IRRF',
-  description: 'Calcule o valor exato do seu salário líquido em 2025. Simule os descontos oficiais de INSS e Imposto de Renda (IRRF) e descubra quanto sobra no seu bolso.',
-}
+  title: "Calculadora de Salário Líquido 2025 | CLT e Descontos",
+  description:
+    "Calcule seu salário líquido com as novas tabelas de INSS e IRRF para 2025. Descubra exatamente quanto você vai receber após os descontos legais.",
+};
 
 export default function SalaryPage() {
   return (
     <main className="container mx-auto px-4 py-12 max-w-4xl">
-      <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Calculadora de salário líquido 2025 online</h1>
-      
+      <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight">
+        Calculadora de Salário Líquido 2025
+      </h1>
+
       {/* Top Ad */}
       <AdSense slot="2405902567" className="my-8" format="auto" />
 
       <div className="prose lg:prose-lg text-gray-700 mb-8">
-        <p>Saber quanto você realmente vai receber no final do mês é essencial para o seu planejamento financeiro. O salário bruto registrado na carteira de trabalho sofre descontos obrigatórios por lei antes de chegar à sua conta bancária.</p>
-        <p>Nossa calculadora online realiza a simulação completa e atualizada para 2025, considerando as novas tabelas progressivas do INSS e do Imposto de Renda (IRRF), além de deduções por dependentes.</p>
+        <p>
+          Utilize nossa calculadora gratuita para descobrir o valor exato do seu{" "}
+          <strong>salário líquido</strong> em 2025. Nossa ferramenta já está
+          atualizada com as novas faixas de contribuição do INSS e as regras do
+          Imposto de Renda (IRRF) vigentes para este ano.
+        </p>
+        <p>
+          Basta informar o salário bruto e os demais dados para ver o
+          detalhamento de todos os descontos no seu holerite.
+        </p>
       </div>
-        
+
       <SalaryCalculator />
 
       <div className="prose lg:prose-lg text-gray-700 mt-12 space-y-8">
         <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Como o cálculo é feito?</h2>
-            <p>O cálculo do salário líquido segue uma ordem específica de descontos:</p>
-            <ol>
-                <li><strong>1º INSS (Previdência):</strong> Calculado sobre o salário bruto usando a <Link href="/tabelas-inss-irpf" className="text-blue-600 hover:underline">tabela progressiva do INSS 2025</Link>. O valor é descontado para sua aposentadoria e benefícios sociais.</li>
-                <li><strong>2º Base do IRRF:</strong> Do salário bruto, subtrai-se o valor do INSS calculado e o valor total de dedução por dependentes (se houver). O resultado é a base para o cálculo do Imposto de Renda.</li>
-                <li><strong>3º IRRF (Imposto de Renda):</strong> Aplica-se a alíquota da <Link href="/tabelas-inss-irpf" className="text-blue-600 hover:underline">tabela do IRRF 2025</Link> sobre a base de cálculo e subtrai-se a parcela a deduzir correspondente à faixa.</li>
-            </ol>
-            <p>O <strong>Salário Líquido</strong> é o resultado do Salário Bruto menos o INSS e menos o IRRF.</p>
-        </section>
-
-        {/* Middle Ad - Corrigido (fora do parágrafo) */}
-        <AdSense slot="2405902567" className="my-8" format="auto" />
-
-        <section className="bg-blue-50 p-6 rounded-lg border border-blue-200 not-prose">
-          <h3 className="text-xl font-bold text-gray-900 mb-3">Desconto Simplificado do IRRF</h3>
-          <p className="text-gray-800">
-            A legislação atual permite que o contribuinte opte por um desconto simplificado mensal (R$ 564,80 em 2024, valor pode ser atualizado para 2025) em substituição às deduções legais (como previdência e dependentes), caso seja mais vantajoso. Nossa calculadora verifica automaticamente qual cenário resulta em menor imposto para você.
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            Como é calculado o Salário Líquido?
+          </h2>
+          <p>
+            O cálculo segue uma ordem específica de descontos obrigatórios por
+            lei:
+          </p>
+          <ol className="list-decimal pl-6 space-y-2">
+            <li>
+              <strong>INSS (Previdência Social):</strong> É o primeiro desconto,
+              calculado sobre o salário bruto total. As alíquotas são
+              progressivas (quem ganha mais, paga mais), variando de 7,5% a 14%,
+              respeitando o teto máximo de contribuição.
+            </li>
+            <li>
+              <strong>IRRF (Imposto de Renda):</strong> É calculado sobre a
+              "base de cálculo", que é o Salário Bruto menos o INSS, menos o
+              valor por dependente e menos a pensão alimentícia (se houver). O
+              sistema também verifica se o "Desconto Simplificado" é mais
+              vantajoso para você.
+            </li>
+            <li>
+              <strong>Outros Descontos:</strong> Após os impostos oficiais, são
+              subtraídos outros valores como vale-transporte, plano de saúde,
+              etc.
+            </li>
+          </ol>
+          <p className="mt-4 font-semibold">
+            Salário Líquido = Salário Bruto - INSS - IRRF - Outros Descontos.
           </p>
         </section>
 
+        {/* Middle Ad */}
+        <AdSense slot="2405902567" className="my-8" format="auto" />
+
+        <section className="bg-blue-50 p-6 rounded-lg border border-blue-200 not-prose shadow-sm">
+          <h3 className="text-xl font-bold text-gray-900 mb-3">
+            Fique atento às Deduções do IRRF
+          </h3>
+          <ul className="list-disc pl-6 space-y-2 text-gray-800">
+            <li>
+              <strong>Dependentes:</strong> Cada dependente legal (filhos,
+              cônjuge, pais) reduz a base de cálculo do imposto em um valor fixo
+              mensal.
+            </li>
+            <li>
+              <strong>Pensão Alimentícia:</strong> O valor pago judicialmente é
+              deduzido integralmente da base de cálculo do IRRF.
+            </li>
+            <li>
+              <strong>Desconto Simplificado:</strong> Se a soma das suas
+              deduções legais for baixa, a Receita Federal aplica automaticamente
+              um desconto padrão simplificado se isso resultar em menos imposto
+              para você. Nossa calculadora faz essa verificação automática.
+            </li>
+          </ul>
+        </section>
+
         <section>
-           <h2 className="text-2xl font-bold text-gray-900 mb-4">Outros Descontos</h2>
-           <p>Além do INSS e IRRF, que são obrigatórios, seu salário pode sofrer outros descontos opcionais ou contratuais, como:</p>
-           <ul>
-               <li>Vale-transporte (até 6% do salário básico).</li>
-               <li>Vale-refeição ou alimentação (parte do custo).</li>
-               <li>Planos de saúde e odontológico.</li>
-               <li>Contribuição sindical (se autorizada).</li>
-               <li>Empréstimos consignados.</li>
-           </ul>
-           <p>Nossa ferramenta foca nos descontos tributários principais (INSS e IR) para te dar uma base sólida do valor líquido.</p>
+          <p>
+            Quer entender melhor as alíquotas? Consulte nossa página com as{" "}
+            <Link
+              href="/tabelas-inss-irpf"
+              className="text-blue-600 hover:underline font-medium"
+            >
+              Tabelas Oficiais do INSS e IRPF
+            </Link>
+            .
+          </p>
         </section>
       </div>
     </main>
