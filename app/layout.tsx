@@ -6,6 +6,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AdSense from "@/components/AdSense";
 import CookieConsent from "@/components/CookieConsent";
+// IMPORTAÇÃO ADICIONADA: Necessária para os links da sidebar
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -57,6 +59,7 @@ export default function RootLayout({
             <aside className="hidden lg:block lg:col-span-1">
               <div className="bg-white p-4 rounded shadow mb-4">
                 {/* Sidebar Ad Slot */}
+                {/* LEMBRETE: Substitua "1234567890" pelo ID real do seu bloco de anúncio vertical/quadrado */}
                 <AdSense
                   slot="1234567890"
                   format="auto"
@@ -64,11 +67,25 @@ export default function RootLayout({
                 />
               </div>
               <div className="bg-white p-4 rounded shadow">
-                 <h3 className="font-bold text-gray-700 mb-2">Mais acessados</h3>
-                 <ul className="text-sm space-y-2 text-blue-600">
-                    <li><a href="#">Cálculo de Rescisão</a></li>
-                    <li><a href="#">Correção Monetária</a></li>
-                 </ul>
+                  <h3 className="font-bold text-gray-700 mb-2">Mais acessados</h3>
+                  {/* LINKS CORRIGIDOS: Usando o componente Link do Next.js */}
+                  <ul className="text-sm space-y-2 text-blue-600">
+                    <li>
+                        <Link href="/calculadora-salario-liquido" className="hover:underline">
+                            Salário Líquido
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href="/calculadora-horas-extras" className="hover:underline">
+                            Horas Extras
+                        </Link>
+                    </li>
+                     <li>
+                        <Link href="/tabelas-inss-irpf" className="hover:underline">
+                            Tabelas INSS/IRPF
+                        </Link>
+                    </li>
+                  </ul>
               </div>
             </aside>
           </div>

@@ -1,65 +1,43 @@
-// Logic for Simple Interest
-// Formula: J = P * i * n
-// M = P + J
-
-export enum RateUnit {
-    MONTHLY = 1,
-    YEARLY = 12
+// Definindo a interface do resultado (Nome correto: SimpleInterestResult)
+export interface SimpleInterestResult {
+  principal: number;
+  rate: number;
+  time: number;
+  totalInterest: number;
+  totalAmount: number;
 }
 
-export enum TimeUnit {
-    MONTHS = 1,
-    YEARS = 12
-}
-
-export interface InterestResult {
-    principal: number;
-    rate: number; // as percentage
-    rateUnit: RateUnit;
-    time: number;
-    timeUnit: TimeUnit;
-    interestAmount: number;
-    totalAmount: number;
-}
-
+// A função principal que aceita os valores e os tipos de período como TEXTO ("monthly" | "yearly")
 export function calculateSimpleInterest(
-    principal: number,
-    rate: number,
-    rateUnit: RateUnit,
-    time: number,
-    timeUnit: TimeUnit
-): InterestResult {
-    // Normalize units to MONTHS
-    // Rate: If Yearly, divide by 12 to get monthly rate.
-    // Time: If Years, multiply by 12 to get months.
+  principal: number,
+  rate: number,
+  time: number,
+  ratePeriod: "monthly" | "yearly", // <-- Aceita string
+  timePeriod: "months" | "years"    // <-- Aceita string
+): SimpleInterestResult {
+  let adjustedRate = rate / 100;
+  let adjustedTime = time;
 
-    // Actually, in Simple Interest, units just need to match.
-    // Let's convert everything to the UNIT OF THE RATE for simplicity, or convert everything to MONTHS.
-    // Standard approach: I = P * i * n
-    // i and n must be in same time unit.
+  // Lógica para padronizar tudo para a mesma base (meses) se necessário
+  if (ratePeriod === "yearly" && timePeriod === "months") {
+    // Taxa anual, tempo em meses: divide a taxa por 12
+    adjustedRate = adjustedRate / 12;
+  } else if (ratePeriod === "monthly" && timePeriod === "years") {
+    // Taxa mensal, tempo em anos: multiplica o tempo por 12
+    adjustedTime = adjustedTime * 12;
+  }
+  // Se ambos forem iguais (ambos meses ou ambos anos), não precisa ajustar.
 
-    // Let's convert "Time" to match "Rate Unit".
+  // Fórmula J = C * i * t
+  const totalInterest = principal * adjustedRate * adjustedTime;
+  // Montante = C + J
+  const totalAmount = principal + totalInterest;
 
-    let adjustedTime = time;
-
-    if (rateUnit === RateUnit.MONTHLY && timeUnit === TimeUnit.YEARS) {
-        adjustedTime = time * 12;
-    } else if (rateUnit === RateUnit.YEARLY && timeUnit === TimeUnit.MONTHS) {
-        adjustedTime = time / 12;
-    }
-
-    // Calculate
-    const i = rate / 100;
-    const interest = principal * i * adjustedTime;
-    const total = principal + interest;
-
-    return {
-        principal,
-        rate,
-        rateUnit,
-        time,
-        timeUnit,
-        interestAmount: interest,
-        totalAmount: total
-    };
+  return {
+    principal,
+    rate,
+    time,
+    totalInterest,
+    totalAmount,
+  };
 }
