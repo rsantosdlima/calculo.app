@@ -39,7 +39,7 @@ const getEasterDate = (year: number): Date => {
 };
 
 // Função para obter feriados móveis de um ano específico
-const getMobileHolidays = (year: number): Record<string, string> = {
+const getMobileHolidays = (year: number): Record<string, string> => {
   const easter = getEasterDate(year);
 
   // Carnaval (Segunda e Terça) - 48 e 47 dias antes da Páscoa
@@ -64,6 +64,7 @@ const getMobileHolidays = (year: number): Record<string, string> = {
     // Nota: Páscoa cai sempre no domingo, então não precisa listar como feriado útil
   };
 };
+// ----------------------------------------------------------------
 
 export interface ExcludedDayDetail {
   date: string; // Formato DD/MM/YYYY
@@ -79,7 +80,7 @@ export interface WorkingDaysResult {
 
 /**
  * Calcula o total de dias corridos entre duas datas, INCLUINDO a data final.
-  */
+ */
 export function calculateTotalDays(
   startDateStr: string,
   endDateStr: string
