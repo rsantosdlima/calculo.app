@@ -31,18 +31,26 @@ describe('SimpleInterestCalculator (Componente)', () => {
     render(<SimpleInterestCalculator />);
     const user = userEvent.setup();
 
-    // 1. Preencher com texto inválido para passar pelo 'required' do HTML
-    // mas cair na validação do isNaN do JavaScript
+    // 1. Preencher o primeiro campo com texto inválido (vai falhar no isNaN do JS)
     const principalInput = screen.getByLabelText(/Valor Principal/i);
-    await user.type(principalInput, 'abc'); // Digitando letras num campo de valor
+    await user.type(principalInput, 'abc');
 
-    // Os outros podem ficar vazios ou também com texto,
-    // o importante é que o JS pegue o erro.
+    // --- CORREÇÃO IMPORTANTE AQUI ---
+    // 2. Precisamos preencher também os outros campos que têm 'required',
+    // caso contrário a validação nativa do HTML5 bloqueia o envio antes do JS rodar.
+    // Podemos colocar valores válidos neles, o 'abc' acima já vai garantir o erro no JS.
+    const rateInput = screen.getByLabelText(/Taxa de Juros/i);
+    await user.type(rateInput, '10');
 
+    const timeInput = screen.getByLabelText(/Período/i);
+    await user.type(timeInput, '12');
+    // -------------------------------
+
+    // 3. Clicar no botão calcular
     const calculateButton = screen.getByRole('button', { name: /Calcular Juros/i });
     await user.click(calculateButton);
 
-    // 3. Agora sim, esperamos que o JS tenha rodado e chamado o alert
+    // 4. Agora sim: o HTML5 deixou passar, mas o JS detectou o 'abc' e chamou o alert.
     expect(window.alert).toHaveBeenCalledWith(expect.stringContaining('preencha os campos com valores numéricos'));
     
     // Verifica se o resultado continua escondido
