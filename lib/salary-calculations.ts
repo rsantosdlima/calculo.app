@@ -8,6 +8,20 @@ import {
 
 export type AlimonyType = "fixed" | "percentage";
 
+// --- NOVA INTERFACE ADICIONADA ---
+// Isso corrige o erro de importação em outros arquivos
+export interface CalculationParams {
+  grossSalary: number;
+  numDependents: number;
+  otherDiscounts: number;
+  hasAlimony: boolean;
+  alimonyType: AlimonyType;
+  alimonyFixedValue: number;
+  alimonyPercentage: number;
+  alimonyBaseValue: number;
+}
+// --------------------------------
+
 export interface CalculationResult {
   grossSalary: number;
   inssDiscount: number;
