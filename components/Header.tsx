@@ -1,5 +1,3 @@
-// CAMINHO: components/Header.tsx
-
 "use client";
 
 import { useState } from "react";
@@ -128,6 +126,13 @@ export default function Header() {
                 >
                   Horas Extras
                 </Link>
+                {/* MOVIDO PARA CÁ: Tabelas Oficiais */}
+                <Link
+                  href="/tabelas-inss-irpf"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 border-t border-gray-100 mt-2 pt-2"
+                >
+                  Tabelas Oficiais
+                </Link>
               </div>
             </div>
 
@@ -209,12 +214,7 @@ export default function Header() {
                 >
                   Contato
                 </Link>
-                <Link
-                  href="/tabelas-inss-irpf"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 border-t border-gray-100 mt-2 pt-2"
-                >
-                  Tabelas Oficiais
-                </Link>
+                {/* LINK REMOVIDO DAQUI */}
               </div>
             </div>
           </nav>
@@ -291,6 +291,18 @@ export default function Header() {
                 >
                   Horas Extras
                 </Link>
+                {/* MOVIDO PARA CÁ (Mobile) */}
+                <Link
+                  href="/tabelas-inss-irpf"
+                  onClick={closeMobileMenu}
+                  className={`block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-t border-gray-100 mt-2 pt-2 ${
+                    isActive("/tabelas-inss-irpf")
+                      ? "border-blue-500"
+                      : "border-transparent"
+                  }`}
+                >
+                  Tabelas Oficiais
+                </Link>
               </div>
             </div>
 
@@ -351,17 +363,7 @@ export default function Header() {
                 Institucional
               </span>
               <div className="mt-2 space-y-1 pl-2">
-                <Link
-                  href="/tabelas-inss-irpf"
-                  onClick={closeMobileMenu}
-                  className={`block pl-3 pr-4 py-2 border-l-4 text-base font-medium ${
-                    isActive("/tabelas-inss-irpf")
-                      ? "border-blue-500"
-                      : "border-transparent"
-                  }`}
-                >
-                  Tabelas Oficiais
-                </Link>
+                {/* LINK REMOVIDO DAQUI (Mobile) */}
                 <Link
                   href="/sobre"
                   onClick={closeMobileMenu}

@@ -1,65 +1,143 @@
+// CAMINHO: app/termos/page.tsx
+
 import type { Metadata } from "next";
+import AdSense from "@/components/AdSense";
+import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Política de Privacidade - Calculo.App",
-  description: "Política de privacidade e coleta de dados do Calculo.App",
+  title: "Termos de Uso | Cálculo.App",
+  description:
+    "Leia os termos e condições para uso das calculadoras e simuladores do Cálculo.App. Informações importantes sobre a isenção de responsabilidade.",
+  robots: {
+    index: false,
+    follow: true,
+  },
 };
 
-export default function PrivacyPage() {
+export default function TermsPage() {
+  const currentDate = new Date().toLocaleDateString("pt-BR", {
+    month: "long",
+    year: "numeric",
+  });
+
   return (
-    <div className="bg-white p-8 rounded-lg shadow-sm prose max-w-none">
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">Política de Privacidade</h1>
+    <main className="container mx-auto px-4 py-12 max-w-4xl">
+      <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+        Termos de Uso
+      </h1>
+      <p className="text-gray-500 mb-8">Última atualização: {currentDate}</p>
 
-      <p className="text-gray-600 mb-4">
-        Última atualização: {new Date().toLocaleDateString()}
-      </p>
+      {/* AdSense Topo */}
+      <AdSense slot="2405902567" className="my-8" format="auto" />
 
-      <h3>1. Introdução</h3>
-      <p>
-        O <strong>Calculo.App</strong> compromete-se com a segurança e privacidade dos dados de seus usuários.
-        Esta Política de Privacidade descreve como coletamos, usamos e protegemos suas informações pessoais ao utilizar nosso site e ferramentas.
-      </p>
+      <div className="prose lg:prose-lg text-gray-700">
+        <p>
+          Bem-vindo ao <strong>Cálculo.App</strong>. Ao acessar e utilizar nosso
+          site e nossas ferramentas, você concorda em cumprir e estar vinculado
+          aos seguintes termos e condições de uso. Se você não concordar com
+          alguma parte destes termos, por favor, não utilize nossos serviços.
+        </p>
 
-      <h3>2. Coleta de Dados</h3>
-      <p>
-        Coletamos informações de duas formas principais:
-      </p>
-      <ul className="list-disc pl-6 mb-4 space-y-2">
-        <li><strong>Dados fornecidos voluntariamente:</strong> Informações inseridas nos formulários de contato (como nome e e-mail) ou nas calculadoras. Note que os dados inseridos nas calculadoras são processados localmente ou de forma anônima e não são armazenados permanentemente em nossos servidores vinculados à sua identidade.</li>
-        <li><strong>Dados de navegação (Cookies):</strong> Utilizamos cookies e tecnologias similares para coletar dados sobre como você interage com nosso site, como endereço IP, tipo de navegador, páginas visitadas e tempo de permanência.</li>
-      </ul>
+        <div className="bg-red-50 border-l-4 border-red-500 p-6 my-8 not-prose rounded-r-lg">
+          <h2 className="text-xl font-bold text-red-800 mb-4 uppercase">
+            1. Isenção de Responsabilidade (Importante)
+          </h2>
+          <p className="text-gray-800 mb-4 font-medium">
+            O Cálculo.App é uma ferramenta educativa e de simulação. Os
+            resultados fornecidos por nossas calculadoras são{" "}
+            <strong>estimativas</strong> baseadas nas informações que você
+            insere e na legislação vigente conhecida no momento.
+          </p>
+          <ul className="list-disc pl-6 space-y-2 text-gray-800">
+            <li>
+              <strong>Não substituem aconselhamento profissional:</strong> Nossos
+              cálculos NÃO substituem a consulta a um contador, advogado
+              trabalhista, especialista financeiro ou aos órgãos oficiais (como
+              Receita Federal ou Ministério do Trabalho).
+            </li>
+            <li>
+              <strong>Sem garantia de exatidão:</strong> Embora nos esforcemos
+              para manter as tabelas e alíquotas atualizadas (como INSS e
+              IRRF), a legislação pode mudar a qualquer momento, e casos
+              específicos podem ter regras não cobertas pelas nossas
+              calculadoras genéricas.
+            </li>
+            <li>
+              <strong>Uso por sua conta e risco:</strong> O Cálculo.App e seus
+              desenvolvedores NÃO se responsabilizam por quaisquer perdas,
+              danos ou decisões financeiras/trabalhistas tomadas com base nos
+              resultados das simulações aqui apresentadas.
+            </li>
+          </ul>
+        </div>
 
-      <h3>3. Uso das Informações</h3>
-      <p>Utilizamos seus dados para:</p>
-      <ul className="list-disc pl-6 mb-4 space-y-2">
-        <li>Fornecer e melhorar nossas ferramentas de cálculo.</li>
-        <li>Exibir publicidade personalizada através do <strong>Google AdSense</strong>.</li>
-        <li>Analisar o tráfego e comportamento dos usuários para otimizar o site.</li>
-        <li>Responder a solicitações enviadas pelo formulário de contato.</li>
-      </ul>
+        <h2>2. Uso Permitido</h2>
+        <p>Você concorda em usar o site apenas para fins legais e pessoais:</p>
+        <ul>
+          <li>
+            Você pode realizar simulações ilimitadas para seu uso pessoal ou
+            profissional (ex: um contador fazendo uma pré-análise).
+          </li>
+          <li>
+            Você não deve tentar acessar áreas restritas do site, interferir no
+            seu funcionamento, ou usar métodos automatizados (bots, scrapers)
+            para coletar dados sem permissão.
+          </li>
+        </ul>
 
-      <h3>4. Publicidade e Cookies (Google AdSense)</h3>
-      <p>
-        O Calculo.App utiliza o Google AdSense para exibir anúncios. O Google e seus parceiros utilizam cookies para veicular anúncios com base em suas visitas anteriores ao nosso site ou a outros sites na Internet.
-      </p>
-      <p>
-        Os usuários podem optar por não receber publicidade personalizada acessando as <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Configurações de Anúncios</a>.
-      </p>
+        <h2>3. Propriedade Intelectual</h2>
+        <p>
+          Todo o conteúdo presente neste site, incluindo textos, a lógica das
+          calculadoras, design, logotipos e código-fonte, é propriedade do
+          Cálculo.App e está protegido pelas leis de direitos autorais e
+          propriedade intelectual. É proibida a reprodução, cópia ou
+          redistribuição do nosso conteúdo para fins comerciais sem autorização
+          expressa.
+        </p>
 
-      <h3>5. Compartilhamento de Dados</h3>
-      <p>
-        Não vendemos ou comercializamos suas informações pessoais identificáveis. Podemos compartilhar dados agregados e não identificáveis com parceiros de análise e publicidade.
-      </p>
+        <h2>4. Links para Terceiros e Publicidade</h2>
+        <p>
+          Nosso site exibe anúncios fornecidos por terceiros (Google AdSense).
+          Não temos controle sobre o conteúdo desses anúncios ou sobre os sites
+          para os quais eles redirecionam. A interação com esses anúncios é de
+          sua responsabilidade e está sujeita aos termos de uso e políticas de
+          privacidade desses terceiros. Leia nossa{" "}
+          <Link href="/privacidade" className="text-blue-600 hover:underline">
+            Política de Privacidade
+          </Link>{" "}
+          para mais detalhes sobre como os anúncios funcionam.
+        </p>
 
-      <h3>6. Seus Direitos (LGPD)</h3>
-      <p>
-        Conforme a Lei Geral de Proteção de Dados (LGPD), você tem direito a acessar, corrigir ou solicitar a exclusão de seus dados pessoais. Para exercer esses direitos, entre em contato conosco através da página de Contato.
-      </p>
+        <h2>5. Modificações nos Termos</h2>
+        <p>
+          Reservamo-nos o direito de alterar estes Termos de Uso a qualquer
+          momento, sem aviso prévio. O uso contínuo do site após quaisquer
+          alterações constitui sua aceitação dos novos termos.
+        </p>
 
-      <h3>7. Alterações nesta Política</h3>
-      <p>
-        Podemos atualizar esta política periodicamente. Recomendamos que revise esta página regularmente para estar ciente de quaisquer alterações.
-      </p>
-    </div>
+        <h2>6. Lei Aplicável</h2>
+        <p>
+          Estes termos são regidos e interpretados de acordo com as leis da
+          República Federativa do Brasil. Qualquer disputa relacionada a estes
+          termos será submetida à jurisdição exclusiva dos tribunais
+          brasileiros.
+        </p>
+
+        <p className="mt-12 pt-8 border-t border-gray-200">
+          <strong>Contato:</strong> Se tiver dúvidas sobre estes Termos de Uso,
+          entre em contato pelo e-mail{" "}
+          <a
+            href="mailto:contato@calculo.app.br"
+            className="text-blue-600 hover:underline"
+          >
+            contato@calculo.app.br
+          </a>
+          .
+        </p>
+      </div>
+
+      {/* AdSense Rodapé */}
+      <AdSense slot="2405902567" className="my-12" format="auto" />
+    </main>
   );
 }

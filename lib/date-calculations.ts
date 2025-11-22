@@ -1,135 +1,185 @@
-import Holidays from 'date-holidays';
-export function calculateDateDiff(startDate: string, endDate: string) {
-  const start = new Date(startDate);
-  const end = new Date(endDate);
+// Feriados Nacionais Fixos (Mês-Dia)
+const NATIONAL_HOLIDAYS_FIXED: Record<string, string> = {
+  "01-01": "Confraternização Universal",
+  "04-21": "Tiradentes",
+  "05-01": "Dia do Trabalhador",
+  "09-07": "Independência do Brasil",
+  "10-12": "Nossa Senhora Aparecida",
+  "11-02": "Finados",
+  "11-15": "Proclamação da República",
+  "11-20": "Dia da Consciência Negra",
+  "12-25": "Natal",
+};
 
-  // Validate
-  if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-    return null;
-  }
+// Função auxiliar para formatar YYYY-MM-DD para chave MM-DD
+const toMonthDayKey = (date: Date): string => {
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  return `${month}-${day}`;
+};
 
-  // Difference in milliseconds
-  const diffTime = Math.abs(end.getTime() - start.getTime());
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+// Função para calcular a data da Páscoa (Método de Gauss) - Necessário para feriados móveis
+const getEasterDate = (year: number): Date => {
+  const a = year % 19;
+  const b = Math.floor(year / 100);
+  const c = year % 100;
+  const d = Math.floor(b / 4);
+  const e = b % 4;
+  const f = Math.floor((b + 8) / 25);
+  const g = Math.floor((b - f + 1) / 3);
+  const h = (19 * a + b - d - g + 15) % 30;
+  const i = Math.floor(c / 4);
+  const k = c % 4;
+  const l = (32 + 2 * e + 2 * i - h - k) % 7;
+  const m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const month = Math.floor((h + l - 7 * m + 114) / 31) - 1; // 0-indexed (Março = 2, Abril = 3)
+  const day = ((h + l - 7 * m + 114) % 31) + 1;
 
-  // Calculate Years, Months, Days breakdown
-  // This is tricky because months have different lengths.
-  // We will use a simple approach: iterate from start to end.
+  return new Date(year, month, day);
+};
 
-  let tempDate = new Date(start);
-  let years = 0;
-  let months = 0;
-  let days = 0;
+// Função para obter feriados móveis de um ano específico
+const getMobileHolidays = (year: number): Record<string, string> = {
+  const easter = getEasterDate(year);
 
-  // Ensure start < end for calculation logic
-  const [d1, d2] = start < end ? [start, end] : [end, start];
+  // Carnaval (Segunda e Terça) - 48 e 47 dias antes da Páscoa
+  const carnaval1 = new Date(easter);
+  carnaval1.setDate(easter.getDate() - 48);
+  const carnaval2 = new Date(easter);
+  carnaval2.setDate(easter.getDate() - 47);
 
-  // Years
-  while(true) {
-     const nextYear = new Date(d1);
-     nextYear.setFullYear(d1.getFullYear() + years + 1);
-     if (nextYear > d2) break;
-     years++;
-  }
+  // Sexta-feira Santa - 2 dias antes da Páscoa
+  const goodFriday = new Date(easter);
+  goodFriday.setDate(easter.getDate() - 2);
 
-  // Months
-  while(true) {
-     const nextMonth = new Date(d1);
-     nextMonth.setFullYear(d1.getFullYear() + years);
-     nextMonth.setMonth(d1.getMonth() + months + 1);
-     if (nextMonth > d2) break;
-     months++;
-  }
-
-  // Remaining Days
-  const current = new Date(d1);
-  current.setFullYear(d1.getFullYear() + years);
-  current.setMonth(d1.getMonth() + months);
-
-  const diffTimeRemaining = Math.abs(d2.getTime() - current.getTime());
-  days = Math.ceil(diffTimeRemaining / (1000 * 60 * 60 * 24));
+  // Corpus Christi - 60 dias após a Páscoa
+  const corpusChristi = new Date(easter);
+  corpusChristi.setDate(easter.getDate() + 60);
 
   return {
-    totalDays: diffDays,
-    years,
-    months,
-    days
+    [toMonthDayKey(carnaval1)]: "Carnaval (Segunda)",
+    [toMonthDayKey(carnaval2)]: "Carnaval (Terça)",
+    [toMonthDayKey(goodFriday)]: "Sexta-feira Santa",
+    [toMonthDayKey(corpusChristi)]: "Corpus Christi",
+    // Nota: Páscoa cai sempre no domingo, então não precisa listar como feriado útil
   };
+};
+
+export interface ExcludedDayDetail {
+  date: string; // Formato DD/MM/YYYY
+  reason: string;
 }
+
+export interface WorkingDaysResult {
+  totalWorkingDays: number;
+  excludedDays: ExcludedDayDetail[];
+}
+
+// --- FUNÇÕES PRINCIPAIS EXPORTADAS ---
+
 /**
- * Calcula a quantidade de dias úteis entre duas datas (inclusive).
- * Utiliza a biblioteca 'date-holidays' para calcular feriados móveis e fixos do Brasil automaticamente.
+ * Calcula o total de dias corridos entre duas datas, INCLUINDO a data final.
+  */
+export function calculateTotalDays(
+  startDateStr: string,
+  endDateStr: string
+): number {
+  if (!startDateStr || !endDateStr) return 0;
+  const start = new Date(startDateStr);
+  const end = new Date(endDateStr);
+
+  // Zera as horas para evitar problemas de fuso horário na diferença
+  start.setHours(0, 0, 0, 0);
+  end.setHours(0, 0, 0, 0);
+
+  if (start > end) return 0;
+
+  const oneDayMs = 1000 * 60 * 60 * 24;
+  const differenceMs = end.getTime() - start.getTime();
+
+  // Adiciona 1 para incluir o dia final no cálculo
+  return Math.round(differenceMs / oneDayMs) + 1;
+}
+
+/**
+ * Calcula dias úteis (Seg-Sex) excluindo feriados nacionais, INCLUINDO data final.
+ * Retorna também o detalhamento dos dias excluídos.
  */
-export function calculateWorkingDays(startDateStr: string, endDateStr: string): number {
-    const start = new Date(startDateStr);
-    const end = new Date(endDateStr);
+export function calculateWorkingDays(
+  startDateStr: string,
+  endDateStr: string
+): WorkingDaysResult {
+  if (!startDateStr || !endDateStr)
+    return { totalWorkingDays: 0, excludedDays: [] };
 
-    // Validações básicas se as datas são reais
-    if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-        return 0;
+  const start = new Date(startDateStr + "T00:00:00"); // Força timezone local
+  const end = new Date(endDateStr + "T00:00:00");
+
+  if (start > end) return { totalWorkingDays: 0, excludedDays: [] };
+
+  let workingDays = 0;
+  const excludedDays: ExcludedDayDetail[] = [];
+  const currentDate = new Date(start);
+
+  // Cache para feriados móveis por ano para evitar recálculo
+  const mobileHolidaysCache: Record<number, Record<string, string>> = {};
+
+  // Loop INCLUSIVO (<= end)
+  while (currentDate <= end) {
+    const dayOfWeek = currentDate.getDay(); // 0 = Domingo, 6 = Sábado
+    const currentYear = currentDate.getFullYear();
+    const monthDayKey = toMonthDayKey(currentDate);
+
+    // Formata a data para exibição no relatório (DD/MM/AAAA)
+    const formattedDate = currentDate.toLocaleDateString("pt-BR");
+
+    let isHoliday = false;
+    let holidayName = "";
+
+    // 1. Verifica Fim de Semana
+    if (dayOfWeek === 0) {
+      excludedDays.push({ date: formattedDate, reason: "Domingo" });
+      isHoliday = true;
+    } else if (dayOfWeek === 6) {
+      excludedDays.push({ date: formattedDate, reason: "Sábado" });
+      isHoliday = true;
     }
-    // Zera as horas para garantir que a comparação seja apenas pelo dia
-    start.setHours(0,0,0,0);
-    end.setHours(0,0,0,0);
-    
-    if (start > end) {
-         // Se data inicial for depois da final, retorna 0
-         return 0; 
+    // 2. Se não for fim de semana, verifica Feriados Nacionais Fixos
+    else if (NATIONAL_HOLIDAYS_FIXED[monthDayKey]) {
+      holidayName = NATIONAL_HOLIDAYS_FIXED[monthDayKey];
+      excludedDays.push({
+        date: formattedDate,
+        reason: `Feriado Nacional (${holidayName})`,
+      });
+      isHoliday = true;
     }
-
-    // 1. Inicializa a biblioteca de feriados carregando as regras do Brasil (BR)
-    const hd = new Holidays('BR');
-
-    // 2. Prepara uma lista rápida para guardar os feriados do período
-    const holidaySet = new Set<string>();
-    
-    const startYear = start.getFullYear();
-    const endYear = end.getFullYear();
-
-    // Busca os feriados de todos os anos envolvidos no intervalo selecionado pelo usuário
-    for (let year = startYear; year <= endYear; year++) {
-        // Pede pra biblioteca os feriados daquele ano
-        const holidaysOfYear = hd.getHolidays(year);
-        
-        // Guarda cada data de feriado encontrada no formato AAAA-MM-DD
-        holidaysOfYear.forEach(holiday => {
-            // Ajuste técnico para garantir a data correta na string, independente do fuso horário
-            const holidayDate = new Date(holiday.date);
-            const yearStr = holidayDate.getFullYear();
-            const monthStr = String(holidayDate.getMonth() + 1).padStart(2, '0');
-            const dayStr = String(holidayDate.getDate()).padStart(2, '0');
-            const formatted = `${yearStr}-${monthStr}-${dayStr}`;
-            
-            holidaySet.add(formatted);
+    // 3. Se não achou, verifica Feriados Móveis
+    else {
+      if (!mobileHolidaysCache[currentYear]) {
+        mobileHolidaysCache[currentYear] = getMobileHolidays(currentYear);
+      }
+      const mobileHolidays = mobileHolidaysCache[currentYear];
+      if (mobileHolidays[monthDayKey]) {
+        holidayName = mobileHolidays[monthDayKey];
+        excludedDays.push({
+          date: formattedDate,
+          reason: `Feriado Nacional Móvel (${holidayName})`,
         });
+        isHoliday = true;
+      }
     }
 
-    // 3. Loop de contagem dia a dia
-    let workingDaysCount = 0;
-    let currentDate = new Date(start);
-
-    while (currentDate <= end) {
-        // 0 = Domingo, 6 = Sábado
-        const dayOfWeek = currentDate.getDay();
-        
-        // Formata a data atual do loop para AAAA-MM-DD para comparar com a lista de feriados
-        const yearStr = currentDate.getFullYear();
-        const monthStr = String(currentDate.getMonth() + 1).padStart(2, '0');
-        const dayStr = String(currentDate.getDate()).padStart(2, '0');
-        const currentDateStr = `${yearStr}-${monthStr}-${dayStr}`;
-
-        const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
-        // Verifica se a data atual está na nossa lista de feriados
-        const isHoliday = holidaySet.has(currentDateStr);
-
-        // Se NÃO for fim de semana E NÃO for feriado, conta como +1 dia útil
-        if (!isWeekend && !isHoliday) {
-            workingDaysCount++;
-        }
-
-        // Avança para o próximo dia no calendário
-        currentDate.setDate(currentDate.getDate() + 1);
+    // Se não foi excluído por nenhum motivo acima, é dia útil
+    if (!isHoliday) {
+      workingDays++;
     }
 
-    return workingDaysCount;
+    // Avança para o próximo dia
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+
+  return {
+    totalWorkingDays: workingDays,
+    excludedDays: excludedDays,
+  };
 }

@@ -8,6 +8,9 @@ export default function OvertimeCalculator() {
   const [monthlyHours, setMonthlyHours] = useState("220");
   const [overtimePercentage, setOvertimePercentage] = useState("50");
   const [hoursWorked, setHoursWorked] = useState("");
+  // Novos estados para DSR preciso
+  const [businessDays, setBusinessDays] = useState("25"); // Ex: Seg-Sáb
+  const [nonBusinessDays, setNonBusinessDays] = useState("5"); // Ex: Domingos + Feriados
   const [includeDSR, setIncludeDSR] = useState(true);
   const [result, setResult] = useState<OvertimeResult | null>(null);
 
@@ -21,18 +24,23 @@ export default function OvertimeCalculator() {
   const handleCalculate = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const salary = parseFloat(grossSalaryStr.replace(",", "."));
+    const salary = parseFloat(grossSalaryStr.replace(/\./g, "").replace(",", "."));
     const hoursMonth = parseFloat(monthlyHours);
     const percentage = parseFloat(overtimePercentage);
     const hoursDone = parseFloat(hoursWorked.replace(",", "."));
+    const bDays = parseInt(businessDays);
+    const nbDays = parseInt(nonBusinessDays);
 
     if (
       isNaN(salary) ||
       isNaN(hoursMonth) ||
       isNaN(percentage) ||
-      isNaN(hoursDone)
+      isNaN(hoursDone) ||
+      (includeDSR && (isNaN(bDays) || isNaN(nbDays) || bDays === 0))
     ) {
-      alert("Por favor, preencha os campos com valores numéricos válidos.");
+      alert(
+        "Por favor, preencha todos os campos com valores numéricos válidos."
+      );
       return;
     }
 
@@ -41,7 +49,9 @@ export default function OvertimeCalculator() {
       hoursMonth,
       percentage,
       hoursDone,
-      includeDSR
+      includeDSR,
+      bDays,
+      nbDays
     );
     setResult(res);
   };
@@ -66,8 +76,7 @@ export default function OvertimeCalculator() {
               type="text"
               id="ot-salary"
               required
-              placeholder="Ex: 3000,00"
-              
+              placeholder="Ex: 3.000,00"
               className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 border p-2 bg-white text-gray-900 text-base md:text-sm"
               value={grossSalaryStr}
               onChange={(e) => setGrossSalaryStr(e.target.value)}
@@ -87,7 +96,6 @@ export default function OvertimeCalculator() {
                 type="number"
                 id="ot-monthlyHours"
                 required
-                
                 className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 border p-2 pr-12 bg-white text-gray-900 text-base md:text-sm"
                 value={monthlyHours}
                 onChange={(e) => setMonthlyHours(e.target.value)}
@@ -114,7 +122,6 @@ export default function OvertimeCalculator() {
                 type="number"
                 id="ot-percentage"
                 required
-                
                 className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 border p-2 pr-12 bg-white text-gray-900 text-base md:text-sm"
                 value={overtimePercentage}
                 onChange={(e) => setOvertimePercentage(e.target.value)}
@@ -140,8 +147,7 @@ export default function OvertimeCalculator() {
               type="text"
               id="ot-hoursWorked"
               required
-              placeholder="Ex: 10.5"
-              
+              placeholder="Ex: 10,5"
               className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 border p-2 bg-white text-gray-900 text-base md:text-sm"
               value={hoursWorked}
               onChange={(e) => setHoursWorked(e.target.value)}
@@ -149,18 +155,66 @@ export default function OvertimeCalculator() {
           </div>
         </div>
 
-        {/* Checkbox DSR */}
-        <div className="flex items-center">
-          <input
-            id="ot-dsr"
-            type="checkbox"
-            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded bg-white"
-            checked={includeDSR}
-            onChange={(e) => setIncludeDSR(e.target.checked)}
-          />
-          <label htmlFor="ot-dsr" className="ml-2 block text-sm text-gray-900">
-            Calcular reflexo no DSR (Descanso Semanal Remunerado)
-          </label>
+        {/* Seção DSR */}
+        <div className="bg-gray-50 p-4 rounded-md border border-gray-200">
+          <div className="flex items-center mb-4">
+            <input
+              id="ot-dsr"
+              type="checkbox"
+              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded bg-white"
+              checked={includeDSR}
+              onChange={(e) => setIncludeDSR(e.target.checked)}
+            />
+            <label
+              htmlFor="ot-dsr"
+              className="ml-2 block text-sm font-medium text-gray-900"
+            >
+              Calcular reflexo no DSR (Descanso Semanal Remunerado)
+            </label>
+          </div>
+
+          {includeDSR && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-in fade-in">
+              <div>
+                <label
+                  htmlFor="ot-businessDays"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Dias Úteis no Mês (Seg-Sáb)
+                </label>
+                <input
+                  type="number"
+                  id="ot-businessDays"
+                  required
+                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 border p-2 bg-white text-gray-900 text-base md:text-sm"
+                  value={businessDays}
+                  onChange={(e) => setBusinessDays(e.target.value)}
+                />
+                <p className="text-xs text-gray-500 mt-1">
+                  Geralmente 25 ou 26 dias.
+                </p>
+              </div>
+              <div>
+                <label
+                  htmlFor="ot-nonBusinessDays"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Domingos e Feriados no Mês
+                </label>
+                <input
+                  type="number"
+                  id="ot-nonBusinessDays"
+                  required
+                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 border p-2 bg-white text-gray-900 text-base md:text-sm"
+                  value={nonBusinessDays}
+                  onChange={(e) => setNonBusinessDays(e.target.value)}
+                />
+                <p className="text-xs text-gray-500 mt-1">
+                  Geralmente 4 ou 5 dias.
+                </p>
+              </div>
+            </div>
+          )}
         </div>
 
         <button
@@ -208,10 +262,12 @@ export default function OvertimeCalculator() {
             {includeDSR && (
               <div className="sm:col-span-2">
                 <dt className="text-sm font-medium text-gray-500 flex items-center">
-                  Reflexo no DSR (Estimado 1/6)
+                  Reflexo no DSR
                   <span
                     className="ml-2 text-xs text-gray-400 cursor-help"
-                    title="Cálculo estimado baseado na razão padrão de 1/6 (um dia de descanso para cada seis trabalhados)."
+                    title={`Cálculo exato: (${formatCurrency(
+                      result.totalOvertimeValue
+                    )} / ${businessDays} dias úteis) * ${nonBusinessDays} dias não úteis.`}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -230,6 +286,10 @@ export default function OvertimeCalculator() {
                 <dd className="mt-1 text-lg font-semibold text-blue-700">
                   {formatCurrency(result.dsrValue)}
                 </dd>
+                <p className="text-xs text-gray-500 mt-1">
+                  Considerando {businessDays} dias úteis e {nonBusinessDays}{" "}
+                  domingos/feriados.
+                </p>
               </div>
             )}
           </dl>

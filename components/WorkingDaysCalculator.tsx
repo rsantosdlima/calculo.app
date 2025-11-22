@@ -1,19 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import { calculateWorkingDays } from "@/lib/date-calculations";
+import {
+  calculateWorkingDays,
+  WorkingDaysResult,
+} from "@/lib/date-calculations";
 
 export default function WorkingDaysCalculator() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [workingDaysResult, setWorkingDaysResult] = useState<number | null>(
-    null
-  );
+  // Agora o estado armazena o objeto completo do resultado, não só o número
+  const [result, setResult] = useState<WorkingDaysResult | null>(null);
+  const [showDetails, setShowDetails] = useState(false);
 
   const handleCalculate = (e: React.FormEvent) => {
     e.preventDefault();
-    const days = calculateWorkingDays(startDate, endDate);
-    setWorkingDaysResult(days);
+    const calculationResult = calculateWorkingDays(startDate, endDate);
+    setResult(calculationResult);
+    setShowDetails(false); // Reseta a visualização dos detalhes ao recalcular
   };
 
   const formatDateDisplay = (dateString: string) => {
@@ -24,6 +28,7 @@ export default function WorkingDaysCalculator() {
 
   return (
     <div className="bg-white p-4 md:p-6 rounded-lg shadow-sm border border-gray-200 my-8">
+      {/* Aviso de orientação sobre o cálculo */}
       <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6 rounded-r-md">
         <div className="flex">
           <div className="flex-shrink-0">
@@ -43,9 +48,9 @@ export default function WorkingDaysCalculator() {
           <div className="ml-3">
             <p className="text-sm text-blue-700">
               <span className="font-bold">Como funciona:</span> O cálculo
-              considera apenas de segunda a sexta-feira, excluindo sábados,
-              domingos e feriados nacionais do Brasil. O dia inicial e final
-              também são contados se forem úteis.
+              considera o intervalo <strong>inclusive</strong> (data inicial e
+              final contam). São excluídos sábados, domingos e feriados
+              nacionais do Brasil.
             </p>
           </div>
         </div>
@@ -64,7 +69,6 @@ export default function WorkingDaysCalculator() {
               type="date"
               id="wd-startDate"
               required
-              
               className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 border p-2 bg-white text-gray-900 text-base md:text-sm"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
@@ -81,7 +85,6 @@ export default function WorkingDaysCalculator() {
               type="date"
               id="wd-endDate"
               required
-              
               className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 border p-2 bg-white text-gray-900 text-base md:text-sm"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
@@ -97,9 +100,9 @@ export default function WorkingDaysCalculator() {
         </button>
       </form>
 
-      {workingDaysResult !== null && (
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 space-y-3 animate-in fade-in duration-300">
-          <h3 className="text-lg md:text-xl font-semibold text-gray-800 border-b border-gray-200 pb-2 mb-4">
+      {result !== null && (
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 space-y-4 animate-in fade-in duration-300">
+          <h3 className="text-lg md:text-xl font-semibold text-gray-800 border-b border-gray-200 pb-2">
             Resultado do cálculo
           </h3>
 
@@ -109,14 +112,73 @@ export default function WorkingDaysCalculator() {
             </p>
             <div className="inline-block bg-white rounded-full px-8 py-4 shadow-sm border border-blue-100">
               <p className="text-5xl font-extrabold text-blue-600 leading-none">
-                {workingDaysResult}
+                {result.totalWorkingDays}
               </p>
             </div>
             <p className="text-gray-600 mt-4 text-sm">
               Intervalo entre <strong>{formatDateDisplay(startDate)}</strong> e{" "}
-              <strong>{formatDateDisplay(endDate)}</strong>.
+              <strong>{formatDateDisplay(endDate)}</strong> (inclusive).
             </p>
           </div>
+
+          {/* Seção de Detalhamento dos Dias Excluídos */}
+          {result.excludedDays.length > 0 && (
+            <div className="mt-6 pt-4 border-t border-gray-200">
+              <button
+                onClick={() => setShowDetails(!showDetails)}
+                className="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center focus:outline-none"
+              >
+                {showDetails ? "Ocultar detalhes" : "Ver dias desconsiderados"}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className={`w-4 h-4 ml-1 transition-transform ${
+                    showDetails ? "rotate-180" : ""
+                  }`}
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+
+              {showDetails && (
+                <div className="mt-4 bg-white rounded-md border border-gray-200 overflow-hidden text-sm">
+                  <table className="min-w-full divide-y divide-gray-200">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
+                          Data
+                        </th>
+                        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
+                          Motivo da exclusão
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                      {result.excludedDays.map((day, index) => (
+                        <tr key={index}>
+                          <td className="px-4 py-2 whitespace-nowrap text-gray-900">
+                            {day.date}
+                          </td>
+                          <td className="px-4 py-2 whitespace-nowrap text-gray-500">
+                            {day.reason}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  <p className="p-3 text-xs text-gray-500 bg-gray-50 border-t border-gray-100">
+                    Total de {result.excludedDays.length} dias não úteis (finais
+                    de semana ou feriados).
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       )}
     </div>

@@ -1,26 +1,19 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* Força a propriedade de esquema de cores do CSS */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light only; /* O 'only' é uma tentativa extra para alguns navegadores */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Força bruta nas cores do corpo e html */
+html, body {
+  background-color: #ffffff !important; /* Fundo branco à força */
+  color: #111827 !important; /* Texto cinza escuro/quase preto à força */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Garante que o fundo padrão do Tailwind seja branco */
+.bg-gray-50 {
+    background-color: #f9fafb !important;
 }
