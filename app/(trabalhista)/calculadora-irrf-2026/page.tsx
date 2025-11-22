@@ -4,90 +4,256 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Simulação de IRRF 2026 | Nova tabela (PL 1087/2025)",
+  title: "Simulador IRRF 2026: Nova Isenção até R$ 5.000 (PL 1087/25)",
   description:
-    "Simule seu Imposto de Renda em 2026 com base no Projeto de Lei 1087/2025. Veja a proposta de isenção para quem ganha até R$ 3.600 e a nova dedução simplificada.",
+    "Calcule seu salário líquido com a proposta de isenção do Imposto de Renda. Entenda o PL 1087/2025, o desconto simplificado e a redução para a classe média.",
+  keywords: [
+    "IRRF 2026",
+    "Isenção imposto de renda",
+    "PL 1087/2025",
+    "Simulador IR",
+    "Reforma Tributária renda",
+  ],
 };
 
 export default function IRRF2026Page() {
   return (
     <main className="container mx-auto px-4 py-12 max-w-4xl">
-      <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight">
-        Simulação IRRF 2026: Isenção até R$ 3.600 (Projeto de Lei)
-      </h1>
+      <header className="mb-10 text-center md:text-left">
+        <span className="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-800 text-xs font-semibold tracking-wide uppercase mb-3">
+          Projeto de Lei 1.087/2025
+        </span>
+        <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
+          Nova Isenção do Imposto de Renda 2026
+        </h1>
+        <p className="text-lg text-gray-600 max-w-2xl">
+          Entenda como a proposta do Governo Federal altera o cálculo do IRRF,
+          garantindo isenção efetiva para quem ganha até R$ 5.000 e reduzindo o
+          imposto da classe média.
+        </p>
+      </header>
 
       {/* Top Ad */}
-      <AdSense slot="2405902567" className="my-8" format="auto" />
-
-      <div className="prose lg:prose-lg text-gray-700 mb-8">
-        <p>
-          O Governo Federal enviou ao Congresso o <strong>Projeto de Lei (PL) nº 1087/2025</strong>, que propõe mudanças significativas no Imposto de Renda da Pessoa Física (IRPF) a partir de 2026. O objetivo principal é ampliar a faixa de isenção, beneficiando trabalhadores com renda de até dois salários mínimos e meio.
-        </p>
-        <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 my-6 not-prose rounded-r-lg shadow-sm">
-          <h3 className="text-lg font-bold text-yellow-800 mb-2 flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 mr-2">
-              <path fillRule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
-            </svg>
-            Atenção: Proposta em Tramitação
-          </h3>
-          <p className="text-gray-800 text-sm">
-            Os cálculos abaixo são uma <strong>simulação</strong> baseada no texto original do PL 1087/2025. As regras ainda <strong>não estão em vigor</strong> e podem ser alteradas ou rejeitadas pelo Congresso Nacional antes de se tornarem lei para 2026.
-          </p>
-        </div>
-        <p>
-          Utilize a calculadora abaixo para comparar como seria o seu desconto de IR hoje (regra 2025) e como ficaria se a nova proposta fosse aprovada.
-        </p>
+      <div className="w-full flex justify-center bg-gray-50 rounded-lg overflow-hidden my-6">
+        <AdSense slot="2405902567" format="auto" />
       </div>
 
-      <IRRF2026Calculator />
+      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8">
+        <div className="prose lg:prose-lg text-gray-700 max-w-none">
+          <p>
+            O <strong>Projeto de Lei (PL) nº 1087/2025</strong> introduz uma
+            mudança histórica na tributação da renda no Brasil. Em vez de apenas
+            corrigir a tabela progressiva, o texto propõe um{" "}
+            <strong>crédito redutor</strong> aplicado diretamente sobre o
+            imposto devido.
+          </p>
+          <p>
+            Na prática, isso significa que quem tem rendimentos tributáveis
+            de até <strong>R$ 5.000,00</strong> ficará isento. 
+            Para quem ganha acima disso, haverá um desconto gradual até o
+            teto de R$ 7.350,00.
+          </p>
+        </div>
 
-      <div className="prose lg:prose-lg text-gray-700 mt-12 space-y-8">
-        <section>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">O que muda com a proposta (PL 1087/2025)?</h2>
-          <p>A principal mudança é a introdução de uma <strong>nova dedução simplificada mensal</strong>, focada em isentar quem ganha menos. Os pontos-chave são:</p>
-          <ul className="list-disc pl-6 space-y-3">
-            <li>
-              <strong>Isenção na Prática até ~R$ 3.600:</strong> Quem ganha até R$ 3.600,00 por mês (considerando o salário mínimo projetado de R$ 1.518 para 2025) ficaria isento de IRRF devido à combinação da faixa de isenção atual com o novo desconto simplificado.
-            </li>
-            <li>
-              <strong>Novo Desconto Simplificado:</strong> A proposta cria um desconto fixo mensal de <strong>R$ 600,00</strong> da base de cálculo do imposto.
-            </li>
-            <li>
-              <strong>Limite do Benefício:</strong> Esse novo desconto de R$ 600,00 seria aplicado apenas para rendimentos tributáveis mensais de até <strong>R$ 7.350,00</strong> (valor equivalente a 5 salários mínimos projetados). Quem ganha acima disso continuaria sujeito às regras normais de deduções legais.
-            </li>
-          </ul>
+        {/* Alerta de Compliance */}
+        <div className="mt-6 bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg">
+          <div className="flex items-start">
+            <svg
+              className="h-6 w-6 text-amber-600 mr-3 mt-0.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              />
+            </svg>
+            <div>
+              <h3 className="text-sm font-bold text-amber-900 uppercase tracking-wide">
+                Status: Em Tramitação
+              </h3>
+              <p className="text-sm text-amber-800 mt-1">
+                Este simulador aplica as regras exatas descritas no texto enviado
+                ao Congresso em outubro de 2025. A lei entra em vigor apenas
+                após aprovação, com efeitos previstos para{" "}
+                <strong>janeiro de 2026</strong>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Calculadora */}
+      <section id="calculadora" className="scroll-mt-8">
+        <IRRF2026Calculator />
+      </section>
+
+      {/* Conteúdo Explicativo Rico */}
+      <div className="mt-16 space-y-12">
+        <section className="prose lg:prose-lg text-gray-700 max-w-none">
+          <h2 className="text-3xl font-bold text-gray-900">
+            Como funciona a "Nova Matemática" do IR?
+          </h2>
+          <p>
+            Diferente das correções anteriores, onde o governo alterava as
+            alíquotas (7,5%, 15%, etc.), o PL 1087/2025 mantém a estrutura
+            atual, mas insere um <strong>passo extra</strong> no final da conta:
+            a redução direta.
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-6 not-prose mt-8">
+            {/* Card 1 */}
+            <div className="bg-green-50 rounded-xl p-6 border border-green-100">
+              <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600 mb-4 font-bold text-xl">
+                1
+              </div>
+              <h3 className="font-bold text-gray-900 mb-2">Isenção Total</h3>
+              <p className="text-sm text-gray-600">
+                Para bases de cálculo até <strong>R$ 5.000,00</strong>. O
+                sistema calcula o imposto e, em seguida, aplica um desconto
+                exatamente igual ao valor devido, zerando a conta.
+              </p>
+            </div>
+
+            {/* Card 2 */}
+            <div className="bg-blue-50 rounded-xl p-6 border border-blue-100">
+              <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-4 font-bold text-xl">
+                2
+              </div>
+              <h3 className="font-bold text-gray-900 mb-2">
+                Redução Gradual
+              </h3>
+              <p className="text-sm text-gray-600">
+                Entre <strong>R$ 5.000,01 e R$ 7.350,00</strong>. O desconto
+                diminui conforme o salário sobe. É uma "rampa" suave para
+                evitar que um pequeno aumento salarial gere um grande imposto.
+              </p>
+            </div>
+
+            {/* Card 3 */}
+            <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+              <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-600 mb-4 font-bold text-xl">
+                3
+              </div>
+              <h3 className="font-bold text-gray-900 mb-2">Sem Alteração</h3>
+              <p className="text-sm text-gray-600">
+                Para rendimentos acima de <strong>R$ 7.350,00</strong>. Quem
+                ganha acima desse teto continua pagando o IRRF conforme as
+                regras vigentes, sem o benefício do redutor extra.
+              </p>
+            </div>
+          </div>
         </section>
 
         {/* Middle Ad */}
-        <AdSense slot="2405902567" className="my-8" format="auto" />
+        <div className="w-full flex justify-center">
+          <AdSense slot="2405902567" format="auto" />
+        </div>
 
-        <section className="bg-blue-50 p-6 rounded-lg border border-blue-200 not-prose shadow-sm">
-          <h3 className="text-xl font-bold text-gray-900 mb-3">Exemplo Prático: Salário de R$ 3.500,00</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-            <div className="bg-white p-4 rounded border border-gray-200">
-              <h4 className="font-bold text-gray-700 mb-2">Regra Atual (2025)</h4>
-              <p className="text-gray-600 text-sm mb-2">Aplica-se o desconto simplificado atual (R$ 564,80) ou deduções legais.</p>
-              <p className="text-lg font-semibold text-red-600">IRRF Devido: ~R$ 55,00</p>
-            </div>
-            <div className="bg-white p-4 rounded border border-blue-200 ring-2 ring-blue-100">
-              <h4 className="font-bold text-blue-700 mb-2">Nova Proposta (2026)</h4>
-              <p className="text-gray-600 text-sm mb-2">Aplica-se o novo desconto simplificado de R$ 600,00 sobre a base.</p>
-              <p className="text-lg font-extrabold text-green-600">IRRF Devido: R$ 0,00 (Isento)</p>
-            </div>
+        {/* FAQ Section */}
+        <section className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+          <div className="p-6 bg-gray-50 border-b border-gray-200">
+            <h2 className="text-2xl font-bold text-gray-900">
+              Perguntas Frequentes sobre o Novo IR
+            </h2>
           </div>
-          <p className="text-sm text-gray-500 mt-4">*Valores aproximados para fins ilustrativos, considerando apenas o desconto simplificado.</p>
-        </section>
+          <div className="divide-y divide-gray-100">
+            <details className="group p-6 cursor-pointer">
+              <summary className="flex justify-between items-center font-medium text-gray-900 list-none">
+                <span>O desconto simplificado de R$ 607,20 continua valendo?</span>
+                <span className="transition group-open:rotate-180">
+                  <svg
+                    fill="none"
+                    height="24"
+                    shapeRendering="geometricPrecision"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
+                    viewBox="0 0 24 24"
+                    width="24"
+                  >
+                    <path d="M6 9l6 6 6-6"></path>
+                  </svg>
+                </span>
+              </summary>
+              <p className="text-gray-600 mt-3 group-open:animate-fadeIn">
+                Sim. O novo redutor é aplicado <em>após</em> todas as deduções
+                legais. Ou seja, primeiro o sistema desconta o INSS, dependentes
+                e a opção mais vantajosa (Dedução Legal ou Desconto
+                Simplificado), calcula o imposto base, e só então aplica a nova
+                redução do PL 1087/25.
+              </p>
+            </details>
 
-        <section>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Como a calculadora funciona?</h2>
-          <p>Nossa ferramenta realiza dois cálculos simultâneos:</p>
-          <ol className="list-decimal pl-6 space-y-2">
-            <li><strong>Cenário Atual (2025):</strong> Calcula o IRRF com base nas tabelas e regras vigentes hoje, escolhendo automaticamente entre as deduções legais (INSS, dependentes, pensão) ou o desconto simplificado atual (R$ 564,80), o que for mais vantajoso.</li>
-            <li><strong>Cenário Proposto (2026):</strong> Aplica a regra do PL 1087/2025. Se o salário for até R$ 7.350, aplica o desconto de R$ 600,00 da base e calcula o imposto. Se for maior, aplica a regra atual como comparação.</li>
-          </ol>
-          <p className="mt-4">
-            Para entender as regras atuais a fundo, consulte nossa página de <Link href="/tabelas-inss-irpf" className="text-blue-600 hover:underline font-medium">Tabelas INSS e IRPF</Link>.
-          </p>
+            <details className="group p-6 cursor-pointer">
+              <summary className="flex justify-between items-center font-medium text-gray-900 list-none">
+                <span>
+                  Como é calculada a redução na "Faixa de Transição"?
+                </span>
+                <span className="transition group-open:rotate-180">
+                  <svg
+                    fill="none"
+                    height="24"
+                    shapeRendering="geometricPrecision"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
+                    viewBox="0 0 24 24"
+                    width="24"
+                  >
+                    <path d="M6 9l6 6 6-6"></path>
+                  </svg>
+                </span>
+              </summary>
+              <p className="text-gray-600 mt-3 group-open:animate-fadeIn">
+                Para salários entre R$ 5.000,01 e R$ 7.350,00, o PL prevê uma
+                fórmula específica:{" "}
+                <strong>
+                  Redução = 978,62 - (0,133145 × Rendimento Tributável)
+                </strong>
+                . Nossa calculadora aplica exatamente essa conta para determinar
+                o valor do seu desconto.
+              </p>
+            </details>
+
+            <details className="group p-6 cursor-pointer">
+              <summary className="flex justify-between items-center font-medium text-gray-900 list-none">
+                <span>
+                  As tabelas do INSS e IRRF atuais vão mudar?
+                </span>
+                <span className="transition group-open:rotate-180">
+                  <svg
+                    fill="none"
+                    height="24"
+                    shapeRendering="geometricPrecision"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
+                    viewBox="0 0 24 24"
+                    width="24"
+                  >
+                    <path d="M6 9l6 6 6-6"></path>
+                  </svg>
+                </span>
+              </summary>
+              <p className="text-gray-600 mt-3 group-open:animate-fadeIn">
+                As tabelas do INSS serão atualizadas no início de 2026 com base
+                no novo salário mínimo. A tabela progressiva do IRRF não tem
+                previsão de mudança neste PL; a alteração é apenas na aplicação
+                deste novo redutor. Consulte as{" "}
+                <Link href="/tabelas-inss-irpf" className="text-blue-600 hover:underline">
+                  Tabelas Vigentes
+                </Link>{" "}
+                para mais detalhes.
+              </p>
+            </details>
+          </div>
         </section>
       </div>
     </main>

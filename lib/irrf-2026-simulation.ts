@@ -5,7 +5,6 @@ import {
   PL_REDUCTION_TIER_2_CONSTANT,
   PL_REDUCTION_TIER_2_FACTOR
 } from "./tax-tables";
-// Importa as interfaces e função corretamente
 import { calculateSalary, CalculationParams, CalculationResult } from "./salary-calculations";
 
 export interface ComparisonResult {
@@ -17,7 +16,7 @@ export interface ComparisonResult {
 }
 
 export function calculateSimulation2026(params: CalculationParams): ComparisonResult {
-  // 1. Calcula o cenário padrão de 2025 (para obter o IRRF atual)
+  // 1. Calcula o cenário padrão de 2025 (para obter o IRRF devido atual)
   const current2025 = calculateSalary(params);
   const grossSalary = params.grossSalary;
   const currentIRRF = current2025.irrfDiscount;
@@ -27,31 +26,32 @@ export function calculateSimulation2026(params: CalculationParams): ComparisonRe
   let proposedRuleApplied = false;
 
   if (grossSalary <= PL_REDUCTION_TIER_1_LIMIT) {
-    // FAIXA 1 (Até R$ 5.000,00): Redução fixa de R$ 312,89
+    // FAIXA 1 (Até R$ 5.000,00): Redução fixa de R$ 312,89 no imposto devido
     reductionValue = PL_REDUCTION_TIER_1_VALUE;
     proposedRuleApplied = true;
 
   } else if (grossSalary <= PL_REDUCTION_TIER_2_LIMIT) {
-    // FAIXA 2 (De R$ 5.000,01 a R$ 7.350,00): Fórmula
+    // FAIXA 2 (De R$ 5.000,01 a R$ 7.350,00): Fórmula de redução gradual
     // Redução = 978,62 - (0,133145 * Salário Bruto)
     reductionValue = PL_REDUCTION_TIER_2_CONSTANT - (PL_REDUCTION_TIER_2_FACTOR * grossSalary);
-    // Garante que a redução não seja negativa (embora a fórmula deva garantir isso nessa faixa)
+    // Garante que a redução não seja negativa por conta de arredondamentos da fórmula perto do limite
     reductionValue = Math.max(0, reductionValue);
     proposedRuleApplied = true;
 
   } else {
-    // FAIXA 3 (Acima de R$ 7.350,00): Sem redução
+    // FAIXA 3 (Acima de R$ 7.350,00): Sem redução adicional
     reductionValue = 0;
     proposedRuleApplied = false;
   }
 
   // 3. Aplica a redução ao IRRF atual
-  // O valor da redução não pode ser maior que o próprio imposto devido.
+  // O valor da redução não pode ser maior que o próprio imposto devido (não gera crédito).
   const finalReduction = Math.min(currentIRRF, reductionValue);
+  
+  // O novo IRRF é o atual menos a redução calculada
   const proposedIRRF = currentIRRF - finalReduction;
 
   // 4. Recalcula o salário líquido com o novo IRRF
-  // Salário Líquido = Bruto - INSS - Novo IRRF - Pensão - Outros
   const proposedNetSalary =
     grossSalary -
     current2025.inssDiscount -
@@ -68,7 +68,7 @@ export function calculateSimulation2026(params: CalculationParams): ComparisonRe
   return {
     current2025,
     proposed2026,
-    difference: finalReduction, // A diferença é o próprio valor da redução aplicada
+    difference: finalReduction, // A diferença no bolso é exatamente o valor da redução aplicada
     proposedRuleApplied,
     reductionValue: finalReduction
   };

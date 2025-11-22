@@ -34,21 +34,17 @@ export const IRRF_TABLE: {
   { limit: null, rate: 0.275, deduction: 908.73 }, // Acima de 4664.68
 ];
 
-// =========================================================
+/// =========================================================
 // NOVAS CONSTANTES PARA O PL 1087/2025 (SIMULAÇÃO 2026)
-// Fonte: Análise corrigida do texto do Projeto de Lei.
+// Fonte: Análise corrigida do mecanismo de redução do PL.
 // =========================================================
 
-// --- FAIXA 1 DE REDUÇÃO ---
-// Limite de salário bruto para a primeira faixa de redução
+// --- FAIXA 1: Redução Fixa (Até R$ 5.000,00) ---
 export const PL_REDUCTION_TIER_1_LIMIT = 5000.00;
-// Valor fixo de redução do IRRF nesta faixa
 export const PL_REDUCTION_TIER_1_VALUE = 312.89;
 
-// --- FAIXA 2 DE REDUÇÃO (Fórmula: 978.62 - 0.133145 * Salário) ---
-// Limite superior da segunda faixa (limite para ter direito à redução)
+// --- FAIXA 2: Redução Gradual (De R$ 5.000,01 até R$ 7.350,00) ---
+// Fórmula: Redução = 978.62 - (0.133145 * Salário Bruto)
 export const PL_REDUCTION_TIER_2_LIMIT = 7350.00;
-// Constante da fórmula
 export const PL_REDUCTION_TIER_2_CONSTANT = 978.62;
-// Fator multiplicador da fórmula
 export const PL_REDUCTION_TIER_2_FACTOR = 0.133145;

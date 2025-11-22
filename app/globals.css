@@ -1,19 +1,29 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* Força a propriedade de esquema de cores do CSS */
+/*
+  Força o navegador a usar o esquema de cores claro via CSS padrão.
+  Isso ajuda a sobrescrever preferências do sistema.
+*/
 :root {
-  color-scheme: light only; /* O 'only' é uma tentativa extra para alguns navegadores */
+  color-scheme: light;
 }
 
-/* Força bruta nas cores do corpo e html */
-html, body {
-  background-color: #ffffff !important; /* Fundo branco à força */
-  color: #111827 !important; /* Texto cinza escuro/quase preto à força */
+/*
+  Usamos a camada 'base' para aplicar estilos padrão a tags HTML.
+  O @apply agora funciona corretamente aqui.
+*/
+@layer base {
+  html, body {
+    @apply bg-white text-gray-900 antialiased;
+    /* Garante fundo branco e texto escuro */
+  }
 }
 
-/* Garante que o fundo padrão do Tailwind seja branco */
-.bg-gray-50 {
-    background-color: #f9fafb !important;
+/*
+  Utilitários personalizados ficam na camada 'utilities'.
+*/
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
 }
