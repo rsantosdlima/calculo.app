@@ -14,7 +14,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 xl:gap-12">
           
           {/* --- Coluna 1: Sobre Nós ---
-             - md:col-span-4 (CORREÇÃO: Ocupa a linha INTEIRA em tablets, forçando links para baixo)
+             - md:col-span-4 (Ocupa a linha INTEIRA em tablets)
              - lg:col-span-2 (Volta para a lateral em telas grandes)
           */}
           <div className="col-span-2 md:col-span-4 lg:col-span-2">
@@ -112,6 +112,11 @@ export default function Footer() {
                   Antecipação de Parcelas
                 </Link>
               </li>
+              <li>
+                <Link href="/conversor-moedas" className="text-sm hover:text-white transition-colors">
+                  Conversor de Moedas
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -178,7 +183,7 @@ export default function Footer() {
         {/* --- Barra Inferior --- */}
         <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
           <p>&copy; {currentYear} Calculo.App. Todos os direitos reservados.</p>
-          <p className="mt-2 md:mt-0 text-xs text-gray-500">v1.6.0</p>
+          <p className="mt-2 md:mt-0 text-xs text-gray-500">v1.7.0</p>
         </div>
       </div>
     </footer>

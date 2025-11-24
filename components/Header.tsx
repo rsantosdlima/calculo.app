@@ -148,6 +148,9 @@ export default function Header() {
                     <Link href="/calculadora-antecipacao-parcelas" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
                       Antecipação de Parcelas
                     </Link>
+                    <Link href="/conversor-moedas" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
+                      Conversor de Moedas
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -230,6 +233,7 @@ export default function Header() {
                 <Link href="/calculadora-juros-compostos" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-juros-compostos")}>Juros Compostos</Link>
                 <Link href="/simulador-financiamento" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/simulador-financiamento")}>Simulador de Financiamento</Link>
                 <Link href="/calculadora-antecipacao-parcelas" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-antecipacao-parcelas")}>Antecipação de Parcelas</Link>
+                <Link href="/conversor-moedas" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/conversor-moedas")}>Conversor de Moedas</Link>
               </div>
             </div>
 
