@@ -1,8 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'export',
-  trailingSlash: true, // Forces /about/index.html structure
+  trailingSlash: true,
   images: {
     unoptimized: true,
   },
