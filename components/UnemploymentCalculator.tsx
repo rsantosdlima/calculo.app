@@ -125,13 +125,12 @@ export default function UnemploymentCalculator() {
                 <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
               </div>
               <h3 className="text-lg font-bold text-red-900 mb-2">Não elegível no momento</h3>
-              <p className="text-red-700">{result.inssValue /* Ops, ineligibilityReason */}</p>
-              <p className="text-red-700">{result.ineligibilityReason}</p>
+              <p className="text-red-700 font-medium">{result.ineligibilityReason}</p>
             </div>
           )}
           
           <p className="text-xs text-center text-gray-500 mt-6">
-            * Cálculo baseado na Tabela do Seguro-Desemprego vigente (atualizada pelo INPC/Salário Mínimo 2025). O valor exato pode variar conforme análise do Ministério do Trabalho.
+            * Cálculo baseado na Tabela do Seguro-Desemprego vigente. O valor exato pode variar conforme análise do Ministério do Trabalho.
           </p>
         </div>
       )}
