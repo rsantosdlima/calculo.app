@@ -6,6 +6,14 @@ export interface OvertimeResult {
   grandTotal: number;
 }
 
+export interface CommissionDSRResult {
+  commissionValue: number;
+  businessDays: number;
+  nonBusinessDays: number;
+  dsrValue: number;
+  totalWithDSR: number;
+}
+
 /**
  * Calcula o valor das horas extras e o reflexo no DSR (Descanso Semanal Remunerado).
  *
@@ -47,5 +55,32 @@ export function calculateOvertime(
     totalOvertimeValue,
     dsrValue,
     grandTotal,
+  };
+}
+
+/**
+ * Calcula o DSR sobre Comissões.
+ * A lógica é idêntica ao reflexo de HE: (Comissões / Dias Úteis) * Dias de Descanso.
+ * Sábado é considerado dia útil para este cálculo, salvo acordo coletivo em contrário.
+ */
+export function calculateCommissionDSR(
+  commissionValue: number,
+  businessDays: number,
+  nonBusinessDays: number,
+  baseSalary: number = 0 // Novo parâmetro com valor padrão 0
+): CommissionDSRResult {
+  let dsrValue = 0;
+
+  if (commissionValue > 0 && businessDays > 0 && nonBusinessDays > 0) {
+    dsrValue = (commissionValue / businessDays) * nonBusinessDays;
+  }
+
+  return {
+    baseSalary,
+    commissionValue,
+    businessDays,
+    nonBusinessDays,
+    dsrValue,
+    totalValue: baseSalary + commissionValue + dsrValue,
   };
 }

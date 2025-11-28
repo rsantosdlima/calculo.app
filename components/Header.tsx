@@ -115,6 +115,9 @@ export default function Header() {
                     <Link href="/calculadora-horas-extras" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
                       Horas Extras
                     </Link>
+                    <Link href="/calculadora-dsr-comissao" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
+                      DSR sobre Comissão
+                    </Link>
                     <div className="border-t border-gray-100 mt-2 pt-2">
                       <Link href="/tabelas-inss-irpf" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all font-medium">
                         Tabelas INSS e IRPF
@@ -220,6 +223,7 @@ export default function Header() {
                 <Link href="/comparativo-clt-pj" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/comparativo-clt-pj")}>Comparativo CLT x PJ</Link>
                 <Link href="/conversor-salario" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/conversor-salario")}>Conversor de Salário</Link>
                 <Link href="/calculadora-horas-extras" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-horas-extras")}>Horas Extras</Link>
+                <Link href="/calculadora-dsr-comissao" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-dsr-comissao")}>DSR sobre Comissão</Link>
                 <Link href="/tabelas-inss-irpf" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/tabelas-inss-irpf")}>Tabelas INSS e IRPF</Link>
               </div>
             </div>

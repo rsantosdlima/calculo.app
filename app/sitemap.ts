@@ -22,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/comparativo-clt-pj`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/conversor-salario`, lastModified: new Date(), changeFrequency: 'yearly', priority: 0.7 },
     { url: `${baseUrl}/tabelas-inss-irpf`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${baseUrl}/calculadora-dsr-comissao`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
 
     // --- Financeiro ---
     { url: `${baseUrl}/calculadora-porcentagem`, lastModified: new Date(), changeFrequency: 'yearly', priority: 0.8 },

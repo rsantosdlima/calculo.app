@@ -71,6 +71,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/calculadora-dsr-comissao" className="text-sm hover:text-white transition-colors">
+                   DSR sobre Comissão
+                </Link>
+              </li>
+              <li>
                 <Link href="/calculadora-irrf-2026" className="text-sm hover:text-white transition-colors text-blue-400 font-medium">
                   Simulação IRRF 2026
                 </Link>
@@ -183,7 +188,7 @@ export default function Footer() {
         {/* --- Barra Inferior --- */}
         <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
           <p>&copy; {currentYear} Calculo.App. Todos os direitos reservados.</p>
-          <p className="mt-2 md:mt-0 text-xs text-gray-500">v1.7.0</p>
+          <p className="mt-2 md:mt-0 text-xs text-gray-500">v1.8.0</p>
         </div>
       </div>
     </footer>
