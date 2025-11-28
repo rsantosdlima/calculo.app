@@ -34,9 +34,10 @@ export const IRRF_TABLE: {
   { limit: null, rate: 0.275, deduction: 908.73 }, // Acima de 4664.68
 ];
 
-/// =========================================================
-// NOVAS CONSTANTES PARA O PL 1087/2025 (SIMULAÇÃO 2026)
-// Fonte: Análise corrigida do mecanismo de redução do PL.
+// =========================================================
+// NOVAS CONSTANTES PARA A LEI 15.270/2025 (SIMULAÇÃO 2026)
+// Fonte: Lei sancionada em 26/11/2025 e publicada em 27/11/2025.
+// Nota: Mantemos o prefixo PL_ nas variáveis para compatibilidade interna.
 // =========================================================
 
 // --- FAIXA 1: Redução Fixa (Até R$ 5.000,00) ---

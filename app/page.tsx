@@ -41,7 +41,7 @@ export default function Home() {
         </p>
       </section>
 
-      {/* 2. Destaque "Hype": IRRF 2026 */}
+      {/* 2. Destaque "Hype": IRRF 2026 - ATUALIZADO PARA LEI SANCIONADA */}
       <section className="max-w-4xl mx-auto">
         <Link href="/calculadora-irrf-2026" className="block group">
           <div className="bg-gradient-to-r from-indigo-900 to-blue-800 rounded-2xl p-1 p-[2px] shadow-xl hover:shadow-2xl transition-all transform hover:scale-[1.01]">
@@ -51,19 +51,19 @@ export default function Home() {
               
               <div className="flex flex-col md:flex-row items-center justify-between relative z-10">
                 <div className="text-center md:text-left mb-6 md:mb-0">
-                  <span className="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-700 text-xs font-bold tracking-wide uppercase mb-3">
-                    Novo Projeto de Lei
+                  <span className="inline-block py-1 px-3 rounded-full bg-green-100 text-green-800 text-xs font-bold tracking-wide uppercase mb-3">
+                    Lei 15.270 Publicada
                   </span>
                   <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-                    Simulador de Isenção IRRF 2026
+                    Simulador IRRF 2026 (Lei Aprovada)
                   </h2>
                   <p className="text-gray-600 max-w-lg">
-                    Descubra se você ficará isento do Imposto de Renda com a nova proposta do governo para salários de até R$ 5.000.
+                    A lei que isenta quem ganha até R$ 5.000 foi sancionada! Simule agora seu salário líquido com as novas regras oficiais para 2026.
                   </p>
                 </div>
                 <div className="flex-shrink-0">
                   <span className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow-md group-hover:shadow-lg">
-                    Simular Agora &rarr;
+                    Calcular Agora &rarr;
                   </span>
                 </div>
               </div>
@@ -133,7 +133,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. Seção de Credibilidade (Trust Bar) - AJUSTADA */}
+      {/* 4. Seção de Credibilidade (Trust Bar) */}
       <section className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-gray-100">
           {/* Coluna 1 */}

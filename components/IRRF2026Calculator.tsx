@@ -13,7 +13,7 @@ export default function IRRF2026Calculator() {
   const [dependents, setDependents] = useState("0");
   const [alimonyStr, setAlimonyStr] = useState("0");
 
-  // Estado do resultado
+  // Estado do resultado (CORREÇÃO: Declarando a variável result)
   const [result, setResult] = useState<ComparisonResult | null>(null);
 
   const formatCurrency = (value: number) => {
@@ -45,13 +45,13 @@ export default function IRRF2026Calculator() {
       numDependents,
       otherDiscounts: 0, // Não relevante para esta simulação
       hasAlimony: alimonyValue > 0,
-      alimonyType: "fixed" as AlimonyType, // Simplificação para este simulador
+      alimonyType: "fixed" as AlimonyType,
       alimonyFixedValue: alimonyValue,
       alimonyPercentage: 0,
       alimonyBaseValue: 0,
     };
 
-    // 3. Chama a função de simulação CORRETA na lib
+    // 3. Chama a função de simulação
     const simulationResult = calculateSimulation2026(params);
 
     setResult(simulationResult);
@@ -61,10 +61,10 @@ export default function IRRF2026Calculator() {
     <div className="bg-white p-4 md:p-8 rounded-xl shadow-lg border border-blue-100 my-8">
       <div className="mb-8 text-center">
         <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
-          Simulador de Impacto
+          Simulador Oficial
         </h2>
         <p className="text-gray-600 mt-2">
-          Compare o IRRF atual (2025) com a nova proposta (2026)
+          Compare o IRRF atual (2025) com a nova Lei 15.270 (2026)
         </p>
       </div>
 
@@ -137,8 +137,7 @@ export default function IRRF2026Calculator() {
 
         <button
           type="submit"
-          // Usando a sintaxe moderna do Tailwind v4 para gradientes
-          className="w-full bg-linear-to-r from-blue-600 to-blue-800 text-white font-bold py-4 px-6 rounded-lg hover:from-blue-700 hover:to-blue-900 transition-all transform hover:scale-[1.02] shadow-md mt-6 text-lg"
+          className="w-full bg-blue-600 text-white font-bold py-4 px-6 rounded-lg hover:bg-blue-700 transition-all transform hover:scale-[1.02] shadow-md mt-6 text-lg"
         >
           Calcular minha redução
         </button>
@@ -169,11 +168,11 @@ export default function IRRF2026Calculator() {
             {/* Card Nova Proposta */}
             <div className="bg-blue-50 p-6 rounded-xl border-2 border-blue-500 text-center relative overflow-hidden flex flex-col justify-between shadow-sm">
               <div className="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg uppercase">
-                Nova Proposta
+                Lei 15.270/25
               </div>
               <div>
                 <h4 className="font-bold text-blue-800 uppercase tracking-wider text-sm mb-2 pt-2">
-                  Com o Novo Redutor (2026)
+                  A partir de Jan/2026
                 </h4>
                 <p className="text-sm text-blue-600 mb-4">
                   Novo imposto a pagar
@@ -246,22 +245,21 @@ export default function IRRF2026Calculator() {
                   >
                     <path
                       fillRule="evenodd"
-                      d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                      d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75S2.25 17.385 2.25 12zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z"
                       clipRule="evenodd"
                     />
                   </svg>
                   Sem alteração prevista.
                 </p>
                 <p className="text-gray-600 text-sm mt-2">
-                  O salário informado está acima do teto de R$ 7.350,00 para o
-                  novo redutor. O cálculo permanece o mesmo da regra atual.
+                  O salário informado está acima do teto de R$ 7.350,00 previsto na Lei. 
+                  O cálculo permanece o mesmo da regra atual.
                 </p>
               </div>
             )}
           </div>
           <p className="text-xs text-center text-gray-500 mt-6">
-            *Simulação baseada nas regras do INSS 2025 e no texto inicial do PL
-            1087/2025. Valores podem mudar.
+            *Simulação baseada nas regras do INSS 2025 e nos parâmetros da Lei 15.270/2025.
           </p>
         </div>
       )}
