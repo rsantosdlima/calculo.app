@@ -7,11 +7,12 @@ export interface OvertimeResult {
 }
 
 export interface CommissionDSRResult {
+  baseSalary: number;
   commissionValue: number;
   businessDays: number;
   nonBusinessDays: number;
   dsrValue: number;
-  totalWithDSR: number;
+  totalValue: number;
 }
 
 /**

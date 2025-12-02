@@ -12,7 +12,7 @@ export default function Footer() {
            - Desktop Grande (lg >= 1024px): 6 colunas.
         */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 xl:gap-12">
-          
+
           {/* --- Coluna 1: Sobre Nós ---
              - md:col-span-4 (Ocupa a linha INTEIRA em tablets)
              - lg:col-span-2 (Volta para a lateral em telas grandes)
@@ -36,6 +36,16 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/calculadora-salario-liquido" className="text-sm hover:text-white transition-colors">
+                  Salário Líquido 2025
+                </Link>
+              </li>
+              <li>
+                <Link href="/calculadora-multiplos-vinculos" className="text-sm hover:text-white transition-colors">
+                  Múltiplos Vínculos
+                </Link>
+              </li>
+              <li>
                 <Link href="/calculadora-ferias" className="text-sm hover:text-white transition-colors">
                   Férias
                 </Link>
@@ -46,8 +56,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/calculadora-salario-liquido" className="text-sm hover:text-white transition-colors">
-                  Salário Líquido
+                <Link href="/calculadora-horas-extras" className="text-sm hover:text-white transition-colors">
+                  Horas Extras
                 </Link>
               </li>
               <li>
@@ -56,28 +66,23 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/calculadora-irrf-2026" className="text-sm hover:text-white transition-colors text-blue-400 font-medium">
+                  Simulação IRRF 2026
+                </Link>
+              </li>
+              <li>
                 <Link href="/comparativo-clt-pj" className="text-sm hover:text-white transition-colors">
                   Comparativo CLT x PJ
                 </Link>
               </li>
               <li>
+                <Link href="/calculadora-dsr-comissao" className="text-sm hover:text-white transition-colors">
+                  DSR sobre Comissão
+                </Link>
+              </li>
+              <li>
                 <Link href="/conversor-salario" className="text-sm hover:text-white transition-colors">
                   Conversor de Salário
-                </Link>
-              </li>
-              <li>
-                <Link href="/calculadora-horas-extras" className="text-sm hover:text-white transition-colors">
-                   Horas Extras
-                </Link>
-              </li>
-              <li>
-                <Link href="/calculadora-dsr-comissao" className="text-sm hover:text-white transition-colors">
-                   DSR sobre Comissão
-                </Link>
-              </li>
-              <li>
-                <Link href="/calculadora-irrf-2026" className="text-sm hover:text-white transition-colors text-blue-400 font-medium">
-                  Simulação IRRF 2026
                 </Link>
               </li>
               <li>
@@ -98,13 +103,13 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/calculadora-juros-simples" className="text-sm hover:text-white transition-colors">
-                  Juros Simples
+                <Link href="/calculadora-juros-compostos" className="text-sm hover:text-white transition-colors">
+                  Juros Compostos
                 </Link>
               </li>
               <li>
-                <Link href="/calculadora-juros-compostos" className="text-sm hover:text-white transition-colors">
-                  Juros Compostos
+                <Link href="/calculadora-juros-simples" className="text-sm hover:text-white transition-colors">
+                  Juros Simples
                 </Link>
               </li>
               <li>
@@ -113,13 +118,13 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/calculadora-antecipacao-parcelas" className="text-sm hover:text-white transition-colors">
-                  Antecipação de Parcelas
+                <Link href="/conversor-moedas" className="text-sm hover:text-white transition-colors">
+                  Conversor de Moedas
                 </Link>
               </li>
               <li>
-                <Link href="/conversor-moedas" className="text-sm hover:text-white transition-colors">
-                  Conversor de Moedas
+                <Link href="/calculadora-antecipacao-parcelas" className="text-sm hover:text-white transition-colors">
+                  Antecipação de Parcelas
                 </Link>
               </li>
             </ul>
@@ -140,8 +145,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/calculadora-idade" className="text-sm hover:text-white transition-colors">
-                  Calculadora de Idade
+                <Link href="/calculadora-horas" className="text-sm hover:text-white transition-colors">
+                  Calculadora de Horas
                 </Link>
               </li>
               <li>
@@ -150,8 +155,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/calculadora-horas" className="text-sm hover:text-white transition-colors">
-                  Calculadora de Horas
+                <Link href="/calculadora-idade" className="text-sm hover:text-white transition-colors">
+                  Calculadora de Idade
                 </Link>
               </li>
             </ul>

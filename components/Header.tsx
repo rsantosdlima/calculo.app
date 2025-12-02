@@ -26,17 +26,15 @@ export default function Header() {
   const isActive = (path: string) => pathname.startsWith(path);
 
   const navLinkClasses = (path: string) =>
-    `text-base font-medium transition-colors duration-200 ${
-      isActive(path)
-        ? "text-blue-700 font-semibold"
-        : "text-gray-700 hover:text-blue-600"
+    `text-base font-medium transition-colors duration-200 ${isActive(path)
+      ? "text-blue-700 font-semibold"
+      : "text-gray-700 hover:text-blue-600"
     }`;
 
   const mobileNavLinkClasses = (path: string) =>
-    `block pl-3 pr-4 py-3 border-l-4 text-base font-medium ${
-      isActive(path)
-        ? "bg-blue-50 border-blue-600 text-blue-700"
-        : "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800"
+    `block pl-3 pr-4 py-3 border-l-4 text-base font-medium ${isActive(path)
+      ? "bg-blue-50 border-blue-600 text-blue-700"
+      : "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800"
     }`;
 
   const Bars3Icon = (
@@ -61,7 +59,7 @@ export default function Header() {
     <header className={`bg-white sticky top-0 z-40 transition-all duration-300 border-b border-gray-100 ${isScrolled ? "shadow-md" : "shadow-sm"}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 lg:h-20">
-          
+
           {/* Logo */}
           <div className="flex">
             <Link href="/" className="shrink-0 flex items-center group" aria-label="Voltar para a página inicial">
@@ -88,35 +86,38 @@ export default function Header() {
               <div className="absolute left-0 top-full mt-0 pt-2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                 <div className="bg-white rounded-lg shadow-xl border border-gray-100 overflow-hidden max-h-[80vh] overflow-y-auto">
                   <div className="py-2">
+                    <Link href="/calculadora-rescisao" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
+                      Rescisão CLT
+                    </Link>
                     <Link href="/calculadora-salario-liquido" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
                       Salário Líquido 2025
                     </Link>
-                    <Link href="/calculadora-irrf-2026" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all font-medium text-blue-800">
-                      Simulação IRRF 2026
-                    </Link>
-                    <Link href="/calculadora-decimo-terceiro" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
-                      Décimo Terceiro
+                    <Link href="/calculadora-multiplos-vinculos" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
+                      Múltiplos Vínculos
                     </Link>
                     <Link href="/calculadora-ferias" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
                       Calculadora de Férias
                     </Link>
-                    <Link href="/calculadora-rescisao" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
-                      Rescisão CLT
-                    </Link>
-                    <Link href="/calculadora-seguro-desemprego" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
-                      Seguro-Desemprego
-                    </Link>
-                    <Link href="/comparativo-clt-pj" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
-                      Comparativo CLT x PJ
-                    </Link>
-                    <Link href="/conversor-salario" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
-                      Conversor de Salário
+                    <Link href="/calculadora-decimo-terceiro" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
+                      Décimo Terceiro
                     </Link>
                     <Link href="/calculadora-horas-extras" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
                       Horas Extras
                     </Link>
+                    <Link href="/calculadora-seguro-desemprego" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
+                      Seguro-Desemprego
+                    </Link>
+                    <Link href="/calculadora-irrf-2026" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all font-medium text-blue-800">
+                      Simulação IRRF 2026
+                    </Link>
+                    <Link href="/comparativo-clt-pj" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
+                      Comparativo CLT x PJ
+                    </Link>
                     <Link href="/calculadora-dsr-comissao" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
                       DSR sobre Comissão
+                    </Link>
+                    <Link href="/conversor-salario" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
+                      Conversor de Salário
                     </Link>
                     <div className="border-t border-gray-100 mt-2 pt-2">
                       <Link href="/tabelas-inss-irpf" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all font-medium">
@@ -139,20 +140,20 @@ export default function Header() {
                     <Link href="/calculadora-porcentagem" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
                       Calculadora de Porcentagem
                     </Link>
-                    <Link href="/calculadora-juros-simples" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
-                      Juros Simples
-                    </Link>
                     <Link href="/calculadora-juros-compostos" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
                       Juros Compostos
+                    </Link>
+                    <Link href="/calculadora-juros-simples" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
+                      Juros Simples
                     </Link>
                     <Link href="/simulador-financiamento" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
                       Simulador de Financiamento
                     </Link>
-                    <Link href="/calculadora-antecipacao-parcelas" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
-                      Antecipação de Parcelas
-                    </Link>
                     <Link href="/conversor-moedas" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
                       Conversor de Moedas
+                    </Link>
+                    <Link href="/calculadora-antecipacao-parcelas" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
+                      Antecipação de Parcelas
                     </Link>
                   </div>
                 </div>
@@ -173,14 +174,14 @@ export default function Header() {
                     <Link href="/calculadora-dias-entre-datas" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
                       Dias entre Datas
                     </Link>
-                    <Link href="/calculadora-idade" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
-                      Calculadora de Idade
+                    <Link href="/calculadora-horas" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
+                      Calculadora de Horas
                     </Link>
                     <Link href="/somar-dias-data" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
                       Somar Dias
                     </Link>
-                    <Link href="/calculadora-horas" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
-                      Calculadora de Horas
+                    <Link href="/calculadora-idade" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
+                      Calculadora de Idade
                     </Link>
                   </div>
                 </div>
@@ -209,21 +210,22 @@ export default function Header() {
         <div className="md:hidden border-t border-gray-100 bg-white max-h-[calc(100vh-4rem)] overflow-y-auto shadow-lg">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/")}>Início</Link>
-            
+
             {/* Seção Trabalhista */}
             <div className="pt-4 pb-2">
               <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Trabalhista</p>
               <div className="mt-2 space-y-1">
-                <Link href="/calculadora-salario-liquido" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-salario-liquido")}>Salário Líquido 2025</Link>
-                <Link href="/calculadora-irrf-2026" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-irrf-2026")}>Simulação IRRF 2026</Link>
-                <Link href="/calculadora-decimo-terceiro" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-decimo-terceiro")}>Décimo Terceiro</Link>
-                <Link href="/calculadora-ferias" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-ferias")}>Calculadora de Férias</Link>
                 <Link href="/calculadora-rescisao" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-rescisao")}>Rescisão CLT</Link>
-                <Link href="/calculadora-seguro-desemprego" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-seguro-desemprego")}>Seguro-Desemprego</Link>
-                <Link href="/comparativo-clt-pj" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/comparativo-clt-pj")}>Comparativo CLT x PJ</Link>
-                <Link href="/conversor-salario" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/conversor-salario")}>Conversor de Salário</Link>
+                <Link href="/calculadora-salario-liquido" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-salario-liquido")}>Salário Líquido 2025</Link>
+                <Link href="/calculadora-multiplos-vinculos" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-multiplos-vinculos")}>Múltiplos Vínculos</Link>
+                <Link href="/calculadora-ferias" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-ferias")}>Calculadora de Férias</Link>
+                <Link href="/calculadora-decimo-terceiro" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-decimo-terceiro")}>Décimo Terceiro</Link>
                 <Link href="/calculadora-horas-extras" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-horas-extras")}>Horas Extras</Link>
+                <Link href="/calculadora-seguro-desemprego" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-seguro-desemprego")}>Seguro-Desemprego</Link>
+                <Link href="/calculadora-irrf-2026" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-irrf-2026")}>Simulação IRRF 2026</Link>
+                <Link href="/comparativo-clt-pj" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/comparativo-clt-pj")}>Comparativo CLT x PJ</Link>
                 <Link href="/calculadora-dsr-comissao" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-dsr-comissao")}>DSR sobre Comissão</Link>
+                <Link href="/conversor-salario" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/conversor-salario")}>Conversor de Salário</Link>
                 <Link href="/tabelas-inss-irpf" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/tabelas-inss-irpf")}>Tabelas INSS e IRPF</Link>
               </div>
             </div>
@@ -233,11 +235,11 @@ export default function Header() {
               <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Financeiro</p>
               <div className="mt-2 space-y-1">
                 <Link href="/calculadora-porcentagem" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-porcentagem")}>Calculadora de Porcentagem</Link>
-                <Link href="/calculadora-juros-simples" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-juros-simples")}>Juros Simples</Link>
                 <Link href="/calculadora-juros-compostos" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-juros-compostos")}>Juros Compostos</Link>
+                <Link href="/calculadora-juros-simples" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-juros-simples")}>Juros Simples</Link>
                 <Link href="/simulador-financiamento" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/simulador-financiamento")}>Simulador de Financiamento</Link>
-                <Link href="/calculadora-antecipacao-parcelas" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-antecipacao-parcelas")}>Antecipação de Parcelas</Link>
                 <Link href="/conversor-moedas" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/conversor-moedas")}>Conversor de Moedas</Link>
+                <Link href="/calculadora-antecipacao-parcelas" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-antecipacao-parcelas")}>Antecipação de Parcelas</Link>
               </div>
             </div>
 
@@ -247,9 +249,9 @@ export default function Header() {
               <div className="mt-2 space-y-1">
                 <Link href="/calculadora-dias-uteis" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-dias-uteis")}>Dias Úteis</Link>
                 <Link href="/calculadora-dias-entre-datas" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-dias-entre-datas")}>Dias entre Datas</Link>
-                <Link href="/calculadora-idade" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-idade")}>Calculadora de Idade</Link>
-                <Link href="/somar-dias-data" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/somar-dias-data")}>Somar Dias</Link>
                 <Link href="/calculadora-horas" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-horas")}>Calculadora de Horas</Link>
+                <Link href="/somar-dias-data" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/somar-dias-data")}>Somar Dias</Link>
+                <Link href="/calculadora-idade" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-idade")}>Calculadora de Idade</Link>
               </div>
             </div>
 

@@ -108,7 +108,7 @@ export default function SalaryCalculator() {
   return (
     <div className="bg-white p-4 md:p-6 rounded-lg shadow-sm border border-gray-200 my-8">
       <h2 className="text-lg md:text-xl font-semibold text-gray-800 mb-6">
-        Simulador de Salário
+        Simulador de Salário Líquido
       </h2>
 
       <form onSubmit={handleCalculate} className="space-y-4">
@@ -196,7 +196,7 @@ export default function SalaryCalculator() {
                 <span>(-) Outros Descontos:</span>
                 <span>
                   {formatCurrency(
-                    parseFloat(otherDiscountsStr.replace(",", "."))
+                    parseFloat(otherDiscountsStr.replace(/\./g, "").replace(",", "."))
                   )}
                 </span>
               </div>
