@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AdSense from "@/components/AdSense";
 import CookieConsent from "@/components/CookieConsent";
-import Link from "next/link";
+import SidebarHighlights from "@/components/SidebarHighlights";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -103,44 +103,8 @@ export default function RootLayout({
                 />
               </div>
 
-              {/* Links Rápidos */}
-              <div className="bg-white p-5 rounded-lg shadow-sm border border-gray-100">
-                <h3 className="font-bold text-gray-900 mb-4 flex items-center">
-                  <span className="text-xl mr-2">🔥</span> Destaques
-                </h3>
-                <ul className="space-y-3 text-sm">
-                  <li className="pb-3 border-b border-gray-50">
-                    <Link
-                      href="/calculadora-irrf-2026"
-                      className="group flex flex-col"
-                      title="Simulação da nova tabela do IR 2026"
-                    >
-                      <span className="font-bold text-blue-700 group-hover:underline">
-                        Simulação IRRF 2026 (PL)
-                      </span>
-                      <span className="text-gray-500 text-xs mt-1">
-                        Nova isenção e redução
-                      </span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/calculadora-salario-liquido"
-                      className="text-gray-700 hover:text-blue-600 hover:underline block py-1"
-                    >
-                      Salário Líquido 2025
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/tabelas-inss-irpf"
-                      className="text-gray-700 hover:text-blue-600 hover:underline block py-1"
-                    >
-                      Tabelas INSS e IRPF
-                    </Link>
-                  </li>
-                </ul>
-              </div>
+              {/* Links Rápidos Dinâmicos */}
+              <SidebarHighlights />
             </aside>
           </div>
         </div>
