@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import AdSense from "@/components/AdSense";
 // import type { Metadata } from "next"; // Metadados não funcionam em Client Components
 
 export default function ContactPage() {
@@ -58,7 +59,7 @@ export default function ContactPage() {
       setSubmitStatus("error");
       setErrorMessage(
         error.message ||
-          "Não foi possível enviar sua mensagem. Tente novamente mais tarde."
+        "Não foi possível enviar sua mensagem. Tente novamente mais tarde."
       );
     } finally {
       setIsSubmitting(false);
@@ -78,9 +79,12 @@ export default function ContactPage() {
         </p>
       </header>
 
+      {/* Top Ad */}
+      <AdSense slot="2405902567" className="mb-10" format="auto" />
+
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-10">
         <form onSubmit={handleSubmit} className="space-y-6">
-          
+
           {/* Mensagens de Feedback */}
           {submitStatus === "success" && (
             <div className="bg-green-50 border-l-4 border-green-500 p-4 rounded animate-in fade-in">
@@ -197,11 +201,10 @@ export default function ContactPage() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className={`w-full md:w-auto md:px-8 py-4 rounded-lg font-bold text-white text-lg transition-all transform hover:scale-[1.02] shadow-md flex items-center justify-center ${
-              isSubmitting
-                ? "bg-blue-400 cursor-not-allowed"
-                : "bg-blue-600 hover:bg-blue-700"
-            }`}
+            className={`w-full md:w-auto md:px-8 py-4 rounded-lg font-bold text-white text-lg transition-all transform hover:scale-[1.02] shadow-md flex items-center justify-center ${isSubmitting
+              ? "bg-blue-400 cursor-not-allowed"
+              : "bg-blue-600 hover:bg-blue-700"
+              }`}
           >
             {isSubmitting ? (
               <>

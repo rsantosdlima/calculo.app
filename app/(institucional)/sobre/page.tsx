@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import AdSense from "@/components/AdSense";
 
 export const metadata: Metadata = {
   title: "Sobre Nós - Calculo.App",
@@ -9,6 +10,9 @@ export default function AboutPage() {
   return (
     <div className="bg-white p-8 rounded-lg shadow-sm prose max-w-none">
       <h1 className="text-3xl font-bold text-gray-900 mb-6">Sobre Nós</h1>
+
+      {/* Top Ad */}
+      <AdSense slot="2405902567" className="mb-8" format="auto" />
 
       <div className="space-y-6 text-gray-700 leading-relaxed">
         <p className="text-lg">

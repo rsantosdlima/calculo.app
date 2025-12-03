@@ -37,11 +37,17 @@ export default function AdSense({
     const observer = new ResizeObserver((entries) => {
       for (const entry of entries) {
         // Check if element has width (and is thus visible)
-        if (entry.contentRect.width > 0) {
+        // We use both contentRect and offsetWidth to be sure
+        if (entry.contentRect.width > 0 && element.offsetWidth > 0) {
           try {
             // Only push if empty to avoid duplicates
             if (element.innerHTML === "") {
-              (window.adsbygoogle = window.adsbygoogle || []).push({});
+              // Small delay to ensure layout is stable
+              setTimeout(() => {
+                if (element.innerHTML === "" && element.offsetWidth > 0) {
+                  (window.adsbygoogle = window.adsbygoogle || []).push({});
+                }
+              }, 100);
             }
             // Once we've attempted to push (or if it's already full), stop observing
             observer.disconnect();
