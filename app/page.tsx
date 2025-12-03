@@ -36,7 +36,7 @@ export default function Home() {
           Financeiros <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Descomplicados</span>
         </h1>
         <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-          Ferramentas precisas e atualizadas para RH, contadores e trabalhadores. 
+          Ferramentas precisas e atualizadas para RH, contadores e trabalhadores.
           Simule rescisões, férias e salários com as regras de <strong>2025</strong>.
         </p>
       </section>
@@ -48,7 +48,7 @@ export default function Home() {
             <div className="bg-white rounded-2xl p-6 md:p-8 relative overflow-hidden">
               {/* Background Decorativo */}
               <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-blue-100 rounded-full opacity-50 blur-xl group-hover:bg-blue-200 transition-all"></div>
-              
+
               <div className="flex flex-col md:flex-row items-center justify-between relative z-10">
                 <div className="text-center md:text-left mb-6 md:mb-0">
                   <span className="inline-block py-1 px-3 rounded-full bg-green-100 text-green-800 text-xs font-bold tracking-wide uppercase mb-3">
@@ -74,7 +74,7 @@ export default function Home() {
 
       {/* Ad Banner (Top) */}
       <div className="w-full flex justify-center">
-        <AdSense slot="2405902567" style={{ minHeight: '100px', display: 'block', width: '100%' }} format="auto" />
+        <AdSense slot="2405902567" format="auto" />
       </div>
 
       {/* 3. Ferramentas Principais (Grid) */}
@@ -85,9 +85,9 @@ export default function Home() {
             Ferramentas Populares
           </h2>
         </div>
-        
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <ToolCard 
+          <ToolCard
             href="/calculadora-salario-liquido"
             title="Salário Líquido 2025"
             description="Cálculo exato com as novas tabelas de INSS e IRRF vigentes."
@@ -95,35 +95,35 @@ export default function Home() {
             colorClass="border-l-green-500"
             badge="Atualizado"
           />
-          <ToolCard 
+          <ToolCard
             href="/calculadora-rescisao"
             title="Rescisão CLT"
             description="Simule seu acerto: aviso prévio, multa FGTS, férias e 13º."
             icon="📝"
             colorClass="border-l-blue-500"
           />
-          <ToolCard 
+          <ToolCard
             href="/calculadora-ferias"
             title="Cálculo de Férias"
             description="Planeje seu descanso com venda de abono e adiantamento."
             icon="🏖️"
             colorClass="border-l-orange-500"
           />
-          <ToolCard 
+          <ToolCard
             href="/calculadora-decimo-terceiro"
             title="13º Salário"
             description="Veja o valor da 1ª e 2ª parcela com os descontos legais."
             icon="🎄"
             colorClass="border-l-red-500"
           />
-          <ToolCard 
+          <ToolCard
             href="/calculadora-seguro-desemprego"
             title="Seguro-Desemprego"
             description="Consulte o valor e a quantidade de parcelas a receber."
             icon="🛡️"
             colorClass="border-l-indigo-500"
           />
-          <ToolCard 
+          <ToolCard
             href="/comparativo-clt-pj"
             title="Comparativo CLT x PJ"
             description="Compare o ganho líquido real anual entre os regimes."
@@ -142,14 +142,14 @@ export default function Home() {
             <h3 className="font-bold text-gray-900 text-lg">100% Atualizado</h3>
             <p className="text-sm text-gray-500 mt-2 max-w-xs">Todas as ferramentas seguem a legislação trabalhista e tabelas vigentes.</p>
           </div>
-          
+
           {/* Coluna 2 */}
           <div className="px-4 pt-8 md:pt-0 flex flex-col items-center justify-center text-center">
             <div className="text-green-600 text-4xl mb-3 font-bold">LGPD</div>
             <h3 className="font-bold text-gray-900 text-lg">Privacidade Total</h3>
             <p className="text-sm text-gray-500 mt-2 max-w-xs">Seus dados não são salvos. Todo o cálculo acontece no seu navegador.</p>
           </div>
-          
+
           {/* Coluna 3 */}
           <div className="px-4 pt-8 md:pt-0 flex flex-col items-center justify-center text-center">
             <div className="text-purple-600 text-4xl mb-3 font-bold">Grátis</div>
@@ -207,7 +207,7 @@ export default function Home() {
           <h2 className="text-2xl font-bold text-gray-900 mb-3">Quem usa o Calculo.App?</h2>
           <p className="text-gray-600">Desenvolvemos nossas ferramentas pensando em diferentes necessidades do mercado de trabalho.</p>
         </div>
-        
+
         <div className="grid md:grid-cols-3 gap-8">
           <div>
             <h4 className="font-bold text-gray-900 mb-2 flex items-center justify-center md:justify-start">
