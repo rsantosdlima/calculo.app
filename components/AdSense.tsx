@@ -34,13 +34,17 @@ export default function AdSense({
       // Only push ads if the script is loaded and we are in the browser
       // Check if the ad element is empty to prevent double injection in React Strict Mode
       if (adRef.current && adRef.current.innerHTML === "") {
-          console.log("AdSense: Pushing ad for slot", slot);
+        // Check if element is visible/has width to avoid "No slot size" error
+        if (adRef.current.offsetWidth > 0 || adRef.current.offsetHeight > 0) {
           (window.adsbygoogle = window.adsbygoogle || []).push({});
+        } else {
+          console.warn("AdSense: Ad slot is hidden or has 0 dimensions, skipping push.");
+        }
       }
     } catch (err) {
       console.error("AdSense Error:", err);
     }
-  }, [slot]); // Added dependency
+  }, [slot]);
 
   return (
     <div className={`adsense-container ${className}`}>
@@ -57,7 +61,7 @@ export default function AdSense({
 
       {!isProduction && (
         <div className="bg-gray-100 border border-gray-300 text-gray-400 text-xs p-2 text-center mt-1">
-            AdSense Placeholder (Slot: {slot})
+          AdSense Placeholder (Slot: {slot})
         </div>
       )}
     </div>
