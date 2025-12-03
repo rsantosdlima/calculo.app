@@ -30,20 +30,32 @@ export default function AdSense({
   const client = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "ca-pub-0000000000000000";
 
   useEffect(() => {
-    try {
-      // Only push ads if the script is loaded and we are in the browser
-      // Check if the ad element is empty to prevent double injection in React Strict Mode
-      if (adRef.current && adRef.current.innerHTML === "") {
-        // Check if element is visible/has width to avoid "No slot size" error
-        if (adRef.current.offsetWidth > 0 || adRef.current.offsetHeight > 0) {
-          (window.adsbygoogle = window.adsbygoogle || []).push({});
-        } else {
-          console.warn("AdSense: Ad slot is hidden or has 0 dimensions, skipping push.");
+    // Wait for layout to settle
+    const timer = setTimeout(() => {
+      try {
+        // Only push ads if the script is loaded and we are in the browser
+        if (adRef.current && adRef.current.innerHTML === "") {
+          // Check if element is visible/has width to avoid "No slot size" error
+          if (adRef.current.offsetWidth > 0 || adRef.current.offsetHeight > 0) {
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+          } else {
+            console.warn(`AdSense: Slot ${slot} hidden/0-size. Retrying in 500ms...`);
+            // Retry once
+            setTimeout(() => {
+              if (adRef.current && adRef.current.innerHTML === "" && (adRef.current.offsetWidth > 0 || adRef.current.offsetHeight > 0)) {
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+              } else {
+                console.warn(`AdSense: Slot ${slot} still hidden after retry.`);
+              }
+            }, 500);
+          }
         }
+      } catch (err) {
+        console.error("AdSense Error:", err);
       }
-    } catch (err) {
-      console.error("AdSense Error:", err);
-    }
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, [slot]);
 
   return (

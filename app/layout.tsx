@@ -91,7 +91,7 @@ export default function RootLayout({
             {/* Barra Lateral (Sidebar) */}
             <aside className="hidden lg:block lg:col-span-1 space-y-6">
               {/* Bloco de Anúncio Vertical */}
-              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex justify-center">
+              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
                 <AdSense
                   slot="3207121991" // Seu ID de slot vertical real
                   format="auto"
