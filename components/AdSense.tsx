@@ -30,32 +30,32 @@ export default function AdSense({
   const client = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "ca-pub-0000000000000000";
 
   useEffect(() => {
-    // Wait for layout to settle
-    const timer = setTimeout(() => {
-      try {
-        // Only push ads if the script is loaded and we are in the browser
-        if (adRef.current && adRef.current.innerHTML === "") {
-          // Check if element is visible/has width to avoid "No slot size" error
-          if (adRef.current.offsetWidth > 0 || adRef.current.offsetHeight > 0) {
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
-          } else {
-            console.warn(`AdSense: Slot ${slot} hidden/0-size. Retrying in 500ms...`);
-            // Retry once
-            setTimeout(() => {
-              if (adRef.current && adRef.current.innerHTML === "" && (adRef.current.offsetWidth > 0 || adRef.current.offsetHeight > 0)) {
-                (window.adsbygoogle = window.adsbygoogle || []).push({});
-              } else {
-                console.warn(`AdSense: Slot ${slot} still hidden after retry.`);
-              }
-            }, 500);
+    const element = adRef.current;
+    if (!element) return;
+
+    // Observer to wait for element to have dimensions
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        // Check if element has width (and is thus visible)
+        if (entry.contentRect.width > 0) {
+          try {
+            // Only push if empty to avoid duplicates
+            if (element.innerHTML === "") {
+              (window.adsbygoogle = window.adsbygoogle || []).push({});
+            }
+            // Once we've attempted to push (or if it's already full), stop observing
+            observer.disconnect();
+          } catch (err) {
+            console.error("AdSense Error:", err);
           }
         }
-      } catch (err) {
-        console.error("AdSense Error:", err);
       }
-    }, 100);
+    });
 
-    return () => clearTimeout(timer);
+    observer.observe(element);
+
+    // Cleanup
+    return () => observer.disconnect();
   }, [slot]);
 
   return (
