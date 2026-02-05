@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: 'Calculadora de horas extras online 2025 | Com reflexo no DSR',
+  title: 'Calculadora de horas extras online 2026 | Com reflexo no DSR',
   description: 'Calcule o valor exato das suas horas extras. Nossa calculadora considera o salário bruto, jornada mensal, porcentagem do adicional (50%, 100%) e o reflexo no DSR.',
 }
 
@@ -27,7 +27,7 @@ export default function OvertimePage() {
         <section>
            <h2 className="text-2xl font-bold text-gray-900 mb-4">Dúvidas frequentes</h2>
            <p><strong>Incide INSS e IR?</strong> Sim, o valor recebido é salarial e sofre descontos. O resultado aqui é o valor <strong>bruto</strong>.</p>
-           <p className="mt-4">Confira as alíquotas em nossas <Link href="/tabelas-inss-irpf" className="text-blue-600 hover:underline">Tabelas de INSS e IRPF 2025</Link>.</p>
+           <p className="mt-4">Confira as alíquotas em nossas <Link href="/tabelas-inss-irpf" className="text-blue-600 hover:underline">Tabelas de INSS e IRPF 2026</Link>.</p>
         </section>
       </div>
     </main>
