@@ -4,7 +4,7 @@ import TerminationCalculator from "@/components/TerminationCalculator";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Calculadora de Rescisão de Contrato 2025 | Acerto Trabalhista",
+  title: "Calculadora de Rescisão de Contrato 2026 | Acerto Trabalhista",
   description: "Simule sua rescisão CLT com precisão. Cálculo para demissão sem justa causa, pedido de demissão, término de contrato e acordo comum.",
   keywords: ["calcular rescisão", "acerto trabalhista", "pedido de demissão", "aviso prévio", "multa fgts"]
 };
@@ -17,7 +17,7 @@ export default function TerminationPage() {
           Calculadora de Rescisão de Contrato
         </h1>
         <p className="text-lg text-gray-600 max-w-2xl">
-          Simule os valores do seu acerto trabalhista considerando as regras atualizadas da CLT para 2025.
+          Simule os valores do seu acerto trabalhista considerando as regras atualizadas da CLT para 2026.
         </p>
       </header>
 
