@@ -161,7 +161,7 @@ export default function ThirteenthCalculator() {
           </div>
 
           <p className="text-xs text-center text-gray-500 mt-6">
-            * O cálculo considera as alíquotas de INSS e IRRF vigentes para 2025. O 13º salário possui tributação exclusiva (não soma com o salário do mês para cálculo do IR).
+            * O cálculo considera as alíquotas de INSS e IRRF vigentes. O 13º salário possui tributação exclusiva (não soma com o salário do mês para cálculo do IR).
           </p>
         </div>
       )}

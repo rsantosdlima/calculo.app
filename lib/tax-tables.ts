@@ -8,7 +8,7 @@ export const INSS_CEILING = 8475.55;
 
 // Tabela Progressiva INSS 2026 (Vigente)
 export const INSS_TABLE = [
-  { limit: 1621.00 rate: 0.075, deduction: 0.00 }, // 1 salário mínimo 2025
+  { limit: 1621.00 rate: 0.075, deduction: 0.00 }, // 1 salário mínimo 2026
   { limit: 2902.84, rate: 0.09, deduction: 24.31500 },
   { limit: 4354.27, rate: 0.12, deduction: 111.40020 },
   { limit: INSS_CEILING, rate: 0.14, deduction: 198.4860 },

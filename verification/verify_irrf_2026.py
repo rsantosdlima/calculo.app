@@ -36,7 +36,7 @@ def verify_irrf_2026(page: Page):
     page.click("button[type=submit]")
 
     # Check Left Card (2025)
-    expect(page.locator("text=Regra Atual (2025)")).to_be_visible()
+    expect(page.locator("text=Regra até 2025")).to_be_visible()
     # Verify IRRF value exists (exact match might be hard due to rounding diffs in INSS, just check visibility)
     expect(page.locator("text=(-) IRRF").first).to_be_visible()
 

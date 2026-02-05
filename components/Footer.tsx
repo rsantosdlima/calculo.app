@@ -37,7 +37,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/calculadora-salario-liquido" className="text-sm hover:text-white transition-colors">
-                  Salário Líquido 2025
+                  Salário Líquido 2026
                 </Link>
               </li>
               <li>

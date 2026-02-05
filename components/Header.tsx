@@ -90,7 +90,7 @@ export default function Header() {
                       Rescisão CLT
                     </Link>
                     <Link href="/calculadora-salario-liquido" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
-                      Salário Líquido 2025
+                      Salário Líquido 2026
                     </Link>
                     <Link href="/calculadora-multiplos-vinculos" className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-600 transition-all">
                       Múltiplos Vínculos
@@ -216,7 +216,7 @@ export default function Header() {
               <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Trabalhista</p>
               <div className="mt-2 space-y-1">
                 <Link href="/calculadora-rescisao" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-rescisao")}>Rescisão CLT</Link>
-                <Link href="/calculadora-salario-liquido" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-salario-liquido")}>Salário Líquido 2025</Link>
+                <Link href="/calculadora-salario-liquido" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-salario-liquido")}>Salário Líquido 2026</Link>
                 <Link href="/calculadora-multiplos-vinculos" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-multiplos-vinculos")}>Múltiplos Vínculos</Link>
                 <Link href="/calculadora-ferias" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-ferias")}>Calculadora de Férias</Link>
                 <Link href="/calculadora-decimo-terceiro" onClick={() => setIsMobileMenuOpen(false)} className={mobileNavLinkClasses("/calculadora-decimo-terceiro")}>Décimo Terceiro</Link>

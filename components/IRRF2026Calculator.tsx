@@ -64,7 +64,7 @@ export default function IRRF2026Calculator() {
           Simulador Oficial
         </h2>
         <p className="text-gray-600 mt-2">
-          Compare o IRRF atual (2025) com a nova Lei 15.270 (2026)
+          Compare o IRRF 2025 com a nova Lei 15.270 (2026)
         </p>
       </div>
 
@@ -154,7 +154,7 @@ export default function IRRF2026Calculator() {
             <div className="bg-gray-50 p-6 rounded-xl border border-gray-200 text-center flex flex-col justify-between">
               <div>
                 <h4 className="font-bold text-gray-600 uppercase tracking-wider text-sm mb-2">
-                  Regra Atual (2025)
+                  Regra até 2025
                 </h4>
                 <p className="text-sm text-gray-500 mb-4">
                   Imposto devido hoje
