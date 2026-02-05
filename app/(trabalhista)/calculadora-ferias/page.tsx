@@ -4,9 +4,9 @@ import VacationCalculator from "@/components/VacationCalculator";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Calculadora de Férias 2025 | Cálculo com 1/3 e Abono",
+  title: "Calculadora de Férias 2026 | Cálculo com 1/3 e Abono",
   description: "Simule o valor exato das suas férias. Veja a tabela de faltas, regras de fracionamento em até 3 períodos e o cálculo do abono pecuniário.",
-  keywords: ["calcular férias", "tabela de faltas férias", "fracionamento de férias", "abono pecuniário", "férias clt 2025"]
+  keywords: ["calcular férias", "tabela de faltas férias", "fracionamento de férias", "abono pecuniário", "férias clt 2026"]
 };
 
 export default function VacationPage() {
@@ -14,7 +14,7 @@ export default function VacationPage() {
     <main className="container mx-auto px-4 py-12 max-w-4xl">
       <header className="mb-10 text-center md:text-left">
         <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
-          Calculadora de Férias 2025
+          Calculadora de Férias 2026
         </h1>
         <p className="text-lg text-gray-600 max-w-2xl">
           Calcule o valor líquido das suas férias de forma rápida. Descubra quanto recebe se vender 10 dias (abono), entenda o desconto por faltas e as regras de fracionamento.
@@ -189,7 +189,7 @@ export default function VacationPage() {
         </details>
 
         <p className="mt-12 text-sm text-gray-500 border-t pt-6">
-          * Este conteúdo é informativo e baseado na CLT vigente em 2025. Acordos coletivos da sua categoria podem ter regras específicas sobre fracionamento. Consulte sempre o RH ou sindicato.
+          * Este conteúdo é informativo e baseado na CLT vigente em 2026. Acordos coletivos da sua categoria podem ter regras específicas sobre fracionamento. Consulte sempre o RH ou sindicato.
         </p>
       </div>
     </main>
