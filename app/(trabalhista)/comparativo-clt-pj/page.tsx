@@ -4,7 +4,7 @@ import CltPjComparison from "@/components/CltPjComparison";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Calculadora CLT x PJ 2025 | Comparativo Salário Líquido",
+  title: "Calculadora CLT x PJ 2026 | Comparativo Salário Líquido",
   description: "Compare salários CLT vs PJ. Descubra qual vale mais a pena considerando impostos do Simples Nacional, FGTS, 13º salário, férias e benefícios.",
   keywords: ["clt ou pj", "calculadora clt pj", "simulador pj x clt", "salário pj equivalente", "impostos pj simples nacional"]
 };
