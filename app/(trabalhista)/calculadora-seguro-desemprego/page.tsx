@@ -4,9 +4,9 @@ import UnemploymentCalculator from "@/components/UnemploymentCalculator";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Calculadora de Seguro-Desemprego 2025 | Valor e Parcelas",
-  description: "Veja se você tem direito ao Seguro-Desemprego. Simule o valor e a quantidade de parcelas com base na nova tabela oficial de 2025 do Ministério do Trabalho.",
-  keywords: ["calcular seguro desemprego", "tabela seguro desemprego 2025", "quantas parcelas seguro desemprego", "valor seguro desemprego", "teto seguro desemprego 2025"]
+  title: "Calculadora de Seguro-Desemprego 2026 | Valor e Parcelas",
+  description: "Veja se você tem direito ao Seguro-Desemprego. Simule o valor e a quantidade de parcelas com base na nova tabela oficial de 2026 do Ministério do Trabalho.",
+  keywords: ["calcular seguro desemprego", "tabela seguro desemprego 2026", "quantas parcelas seguro desemprego", "valor seguro desemprego", "teto seguro desemprego 2026"]
 };
 
 export default function UnemploymentPage() {
@@ -17,7 +17,7 @@ export default function UnemploymentPage() {
           Calculadora de Seguro-Desemprego
         </h1>
         <p className="text-lg text-gray-600 max-w-2xl">
-          Acabou de ser demitido? Descubra quantas parcelas do benefício você pode receber e qual será o valor exato, atualizado com a tabela oficial do MTE vigente a partir de 11 de janeiro de 2025.
+          Acabou de ser demitido? Descubra quantas parcelas do benefício você pode receber e qual será o valor exato, atualizado com a tabela oficial do MTE vigente a partir de 11 de janeiro de 2026.
         </p>
       </header>
 
@@ -48,9 +48,9 @@ export default function UnemploymentPage() {
           <AdSense slot="2405902567" format="auto" />
         </div>
 
-        <h3 className="text-xl font-bold text-gray-900 mt-8 mb-4">Como é calculado o valor em 2025?</h3>
+        <h3 className="text-xl font-bold text-gray-900 mt-8 mb-4">Como é calculado o valor em 2026?</h3>
         <p>
-          O valor da parcela é baseado na <strong>média dos seus 3 últimos salários</strong> anteriores à demissão. Sobre essa média, aplica-se a tabela oficial de 2025:
+          O valor da parcela é baseado na <strong>média dos seus 3 últimos salários</strong> anteriores à demissão. Sobre essa média, aplica-se a tabela oficial de 2026:
         </p>
         <ul className="list-disc pl-6 text-gray-800 space-y-1 text-sm">
           <li>Média até <strong>R$ 2.138,76</strong>: Recebe 80% do salário médio.</li>
