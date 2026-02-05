@@ -1,17 +1,17 @@
 // ==========================================
-// DADOS VIGENTES PARA 2025 (FONTE OFICIAL)
+// DADOS VIGENTES PARA 2026 (FONTE OFICIAL)
 // ==========================================
 
-// Teto máximo do salário de contribuição do INSS para 2025
+// Teto máximo do salário de contribuição do INSS para 2026
 // (Valor projetado com base no aumento do salário mínimo, confirmar valor oficial quando publicado pela portaria interministerial)
-export const INSS_CEILING = 8157.41;
+export const INSS_CEILING = 8475.55;
 
-// Tabela Progressiva INSS 2025 (Vigente)
+// Tabela Progressiva INSS 2026 (Vigente)
 export const INSS_TABLE = [
-  { limit: 1518.00, rate: 0.075, deduction: 0.00 }, // 1 salário mínimo 2025
-  { limit: 2793.88, rate: 0.09, deduction: 22.77 },
-  { limit: 4190.83, rate: 0.12, deduction: 106.40 },
-  { limit: INSS_CEILING, rate: 0.14, deduction: 190.40 },
+  { limit: 1621.00 rate: 0.075, deduction: 0.00 }, // 1 salário mínimo 2025
+  { limit: 2902.84, rate: 0.09, deduction: 24.31500 },
+  { limit: 4354.27, rate: 0.12, deduction: 111.40020 },
+  { limit: INSS_CEILING, rate: 0.14, deduction: 198.4860 },
 ];
 
 // Dedução por dependente no IRRF (Valor fixo mensal)
