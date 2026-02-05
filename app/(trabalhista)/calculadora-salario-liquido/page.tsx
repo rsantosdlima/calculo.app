@@ -4,16 +4,16 @@ import Link from "next/link";
 import SalaryCalculator from "@/components/SalaryCalculator";
 
 export const metadata: Metadata = {
-  title: "Calculadora de Salário Líquido 2025 | CLT e Descontos",
+  title: "Calculadora de Salário Líquido 2026 | CLT e Descontos",
   description:
-    "Calcule seu salário líquido com as novas tabelas de INSS e IRRF para 2025. Descubra exatamente quanto você vai receber após os descontos legais.",
+    "Calcule seu salário líquido com as novas tabelas de INSS e IRRF para 2026. Descubra exatamente quanto você vai receber após os descontos legais.",
 };
 
 export default function SalaryPage() {
   return (
     <main className="container mx-auto px-4 py-12 max-w-4xl">
       <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight">
-        Calculadora de Salário Líquido 2025
+        Calculadora de Salário Líquido 2026
       </h1>
 
       {/* Top Ad */}
@@ -22,7 +22,7 @@ export default function SalaryPage() {
       <div className="prose lg:prose-lg text-gray-700 mb-8">
         <p>
           Utilize nossa calculadora gratuita para descobrir o valor exato do seu{" "}
-          <strong>salário líquido</strong> em 2025. Nossa ferramenta já está
+          <strong>salário líquido</strong> em 2026. Nossa ferramenta já está
           atualizada com as novas faixas de contribuição do INSS e as regras do
           Imposto de Renda (IRRF) vigentes para este ano.
         </p>
