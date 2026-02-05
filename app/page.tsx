@@ -37,7 +37,7 @@ export default function Home() {
         </h1>
         <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
           Ferramentas precisas e atualizadas para RH, contadores e trabalhadores.
-          Simule rescisões, férias e salários com as regras de <strong>2025</strong>.
+          Simule rescisões, férias e salários com as regras de <strong>2026</strong>.
         </p>
       </section>
 
@@ -89,7 +89,7 @@ export default function Home() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <ToolCard
             href="/calculadora-salario-liquido"
-            title="Salário Líquido 2025"
+            title="Salário Líquido 2026"
             description="Cálculo exato com as novas tabelas de INSS e IRRF vigentes."
             icon="💰"
             colorClass="border-l-green-500"
@@ -138,7 +138,7 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-gray-100">
           {/* Coluna 1 */}
           <div className="px-4 flex flex-col items-center justify-center text-center">
-            <div className="text-blue-600 text-4xl mb-3 font-bold">2025</div>
+            <div className="text-blue-600 text-4xl mb-3 font-bold">2026</div>
             <h3 className="font-bold text-gray-900 text-lg">100% Atualizado</h3>
             <p className="text-sm text-gray-500 mt-2 max-w-xs">Todas as ferramentas seguem a legislação trabalhista e tabelas vigentes.</p>
           </div>
