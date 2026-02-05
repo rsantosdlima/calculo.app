@@ -4,7 +4,7 @@ import MultipleBondsCalculator from "@/components/MultipleBondsCalculator";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-    title: "Calculadora de Salário Líquido com Múltiplos Vínculos 2025",
+    title: "Calculadora de Salário Líquido com Múltiplos Vínculos 2026",
     description:
         "Calcule o salário líquido somando múltiplos vínculos empregatícios. Verifique se o recolhimento do INSS está correto e simule o IRRF consolidado.",
 };
