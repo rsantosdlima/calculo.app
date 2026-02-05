@@ -16,8 +16,8 @@ const formatPercent = (value: number) => {
 };
 
 export const metadata: Metadata = {
-  title: 'Tabelas INSS e IRPF 2025 atualizadas | Alíquotas e deduções oficiais',
-  description: 'Consulte as tabelas oficiais de contribuição mensal do INSS e do Imposto de Renda (IRPF) vigentes em 2025. Veja as faixas salariais, alíquotas progressivas e parcelas a deduzir.',
+  title: 'Tabelas INSS e IRPF 2026 atualizadas | Alíquotas e deduções oficiais',
+  description: 'Consulte as tabelas oficiais de contribuição mensal do INSS e do Imposto de Renda (IRPF) vigentes em 2026. Veja as faixas salariais, alíquotas progressivas e parcelas a deduzir.',
 }
 
 export default function TaxTablesPage() {
@@ -25,7 +25,7 @@ export default function TaxTablesPage() {
     <main className="container mx-auto px-4 py-12 max-w-4xl">
       
       <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-        Tabelas de contribuição mensal: INSS e IRPF (Vigência 2025)
+        Tabelas de contribuição mensal: INSS e IRPF (Vigência 2026)
       </h1>
 
       <div className="prose lg:prose-lg text-gray-700 mb-12">
@@ -33,7 +33,7 @@ export default function TaxTablesPage() {
           Para realizar o cálculo correto do salário líquido e de outros direitos trabalhistas, é fundamental utilizar as tabelas oficiais atualizadas.
         </p>
         <p>
-          Abaixo, disponibilizamos as tabelas vigentes para o ano de **2025** utilizadas nos cálculos do nosso site. Os dados são centralizados e atualizados conforme a legislação.
+          Abaixo, disponibilizamos as tabelas vigentes para o ano de **2026** utilizadas nos cálculos do nosso site. Os dados são centralizados e atualizados conforme a legislação.
         </p>
       </div>
 
@@ -41,10 +41,10 @@ export default function TaxTablesPage() {
       <section className="mb-16">
         <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
             <span className="bg-blue-600 w-2 h-8 mr-3 rounded-sm"></span>
-            Tabela INSS 2025 (Contribuição Previdenciária)
+            Tabela INSS 2026 (Contribuição Previdenciária)
         </h2>
         <p className="text-gray-700 mb-6">
-           A contribuição para o INSS é progressiva. A alíquota incide apenas sobre a parcela do salário que se enquadra em cada faixa. O teto máximo de contribuição em 2025 é sobre o salário de <strong>{formatCurrency(INSS_CEILING)}</strong>.
+           A contribuição para o INSS é progressiva. A alíquota incide apenas sobre a parcela do salário que se enquadra em cada faixa. O teto máximo de contribuição em 2026 é sobre o salário de <strong>{formatCurrency(INSS_CEILING)}</strong>.
         </p>
 
         <div className="overflow-x-auto shadow-sm border border-gray-200 rounded-lg">
@@ -86,10 +86,10 @@ export default function TaxTablesPage() {
       <section className="mb-12">
         <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
             <span className="bg-green-600 w-2 h-8 mr-3 rounded-sm"></span>
-            Tabela IRPF 2025 (Imposto de Renda na Fonte)
+            Tabela IRPF 2026 (Imposto de Renda na Fonte)
         </h2>
         <p className="text-gray-700 mb-6">
-           Tabela vigente para 2025. O cálculo do IR permite um desconto simplificado mensal de <strong>{formatCurrency(IRRF_SIMPLIFIED_DISCOUNT)}</strong> caso seja mais vantajoso que as deduções legais (dependentes, etc.).
+           Tabela vigente para 2026. O cálculo do IR permite um desconto simplificado mensal de <strong>{formatCurrency(IRRF_SIMPLIFIED_DISCOUNT)}</strong> caso seja mais vantajoso que as deduções legais (dependentes, etc.).
         </p>
 
         <div className="overflow-x-auto shadow-sm border border-gray-200 rounded-lg">
@@ -135,7 +135,7 @@ export default function TaxTablesPage() {
       <div className="prose lg:prose-lg text-gray-700 mt-12 p-6 bg-gray-50 rounded-lg border border-gray-100">
         <h3 className="text-xl font-bold text-gray-900 mb-2">Atualização dos dados</h3>
         <p>
-            As tabelas são atualizadas conforme a legislação vigente. A tabela do INSS acompanha o salário mínimo de 2025 (R$ 1.518,00), e a tabela do IRPF reflete as faixas atuais para o ano-calendário.
+            As tabelas são atualizadas conforme a legislação vigente. A tabela do INSS acompanha o salário mínimo de 2026 (R$ 1.621,00), e a tabela do IRPF reflete as faixas atuais para o ano-calendário.
         </p>
       </div>
 
