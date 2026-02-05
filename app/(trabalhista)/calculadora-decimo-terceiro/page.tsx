@@ -4,7 +4,7 @@ import ThirteenthCalculator from "@/components/ThirteenthCalculator";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Calculadora de Décimo Terceiro 2025 | 1ª e 2ª Parcela",
+  title: "Calculadora de Décimo Terceiro 2026 | 1ª e 2ª Parcela",
   description: "Calcule o valor exato do seu 13º salário. Descubra quanto cai na primeira parcela (novembro) e o valor líquido da segunda parcela (dezembro) com descontos.",
   keywords: ["calcular 13o salário", "segunda parcela décimo terceiro", "cálculo décimo terceiro proporcional", "descontos 13o salario"]
 };
@@ -14,7 +14,7 @@ export default function ThirteenthPage() {
     <main className="container mx-auto px-4 py-12 max-w-4xl">
       <header className="mb-10 text-center md:text-left">
         <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
-          Calculadora de Décimo Terceiro 2025
+          Calculadora de Décimo Terceiro 2026
         </h1>
         <p className="text-lg text-gray-600 max-w-2xl">
           Simule quanto você vai receber de Gratificação Natalina. Nossa ferramenta calcula o valor proporcional, a primeira parcela sem descontos e o líquido final com INSS e IRRF.
@@ -33,7 +33,7 @@ export default function ThirteenthPage() {
 
       {/* Conteúdo Explicativo */}
       <div className="prose lg:prose-lg text-gray-700 mt-16 max-w-none">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Datas de Pagamento em 2025</h2>
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">Datas de Pagamento em 2026</h2>
         
         <div className="grid md:grid-cols-2 gap-6 not-prose mb-8">
           <div className="bg-green-50 p-6 rounded-xl border border-green-200">
@@ -86,7 +86,7 @@ export default function ThirteenthPage() {
         </details>
 
         <p className="mt-12 text-sm text-gray-500 border-t pt-6">
-          * Este simulador utiliza as tabelas oficiais de 2025. Médias de horas extras e comissões devem ser somadas ao salário bruto para um cálculo mais preciso.
+          * Este simulador utiliza as tabelas oficiais de 2026. Médias de horas extras e comissões devem ser somadas ao salário bruto para um cálculo mais preciso.
         </p>
       </div>
     </main>
